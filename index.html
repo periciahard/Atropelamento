@@ -10,10 +10,23 @@
 <meta name="theme-color" content="#0f172a">
 <title>Atropelamento - Perícia de Campo</title>
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#d1d5db;--main:#111827;--ok:#065f46;--warn:#92400e}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:15px}.top{position:sticky;top:0;z-index:10;background:var(--main);color:white;padding:10px 12px;box-shadow:0 2px 8px #0003}.top h1{font-size:18px;margin:0 0 8px}.bar{display:flex;gap:6px;overflow:auto}.bar button,.btn{border:0;border-radius:8px;padding:9px 11px;background:#e5e7eb;color:#111827;font-weight:700;white-space:nowrap}.bar button{background:#374151;color:#fff}.bar button.danger{background:#7f1d1d}.wrap{max-width:1100px;margin:auto;padding:12px}.status{font-size:12px;color:#d1d5db}.wide{grid-column:1/-1}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.section summary{cursor:pointer;padding:13px 14px;font-weight:800;background:#eef2ff;border-bottom:1px solid var(--line)}.content{padding:12px}label{display:block;font-size:12px;color:#374151;font-weight:700;margin:6px 0 3px}.hint{font-size:11px;color:var(--muted);font-weight:400}input,select,textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px;background:white;font:inherit}textarea{min-height:70px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px;margin:8px 0}.check{display:flex;gap:7px;align-items:center;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:7px}.check input{width:auto}table{width:100%;border-collapse:collapse;margin-top:8px;background:white}th,td{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}th{background:#f3f4f6}.small{font-size:12px;color:var(--muted)}.rowbtn{padding:6px 8px;border-radius:6px;border:0;background:#fee2e2;color:#7f1d1d}.out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:160px}.pill{display:inline-block;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;border-radius:999px;padding:3px 7px;font-size:12px}.warn{background:#fffbeb;color:#92400e;border-color:#fde68a}canvas{width:100%;max-width:900px;border:1px solid var(--line);border-radius:10px;background:#fff}@media print{.top,.noprint,summary:after,.btn,.bar{display:none!important}body{background:#fff}.section{border:0}.section summary{display:none}.content{padding:0}.out{border:0}.printOnly{display:block!important}}.printOnly{display:none}</style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#d1d5db;--main:#111827;--ok:#065f46;--warn:#92400e}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:15px}.top{position:sticky;top:0;z-index:10;background:var(--main);color:white;padding:10px 12px;box-shadow:0 2px 8px #0003}.top h1{font-size:18px;margin:0 0 8px}.bar{display:flex;gap:6px;overflow:auto}.bar button,.btn{border:0;border-radius:8px;padding:9px 11px;background:#e5e7eb;color:#111827;font-weight:700;white-space:nowrap}.bar button{background:#374151;color:#fff}.bar button.danger{background:#7f1d1d}.wrap{max-width:1100px;margin:auto;padding:12px}.status{font-size:12px;color:#d1d5db}.wide{grid-column:1/-1}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.section summary{cursor:pointer;padding:13px 14px;font-weight:800;background:#eef2ff;border-bottom:1px solid var(--line)}.content{padding:12px}label{display:block;font-size:12px;color:#374151;font-weight:700;margin:6px 0 3px}.hint{font-size:11px;color:var(--muted);font-weight:400}input,select,textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px;background:white;font:inherit}textarea{min-height:70px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px;margin:8px 0}.check{display:flex;gap:7px;align-items:center;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:7px}.check input{width:auto}table{width:100%;border-collapse:collapse;margin-top:8px;background:white}th,td{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}th{background:#f3f4f6}.small{font-size:12px;color:var(--muted)}.rowbtn{padding:6px 8px;border-radius:6px;border:0;background:#fee2e2;color:#7f1d1d}.out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:160px}.pill{display:inline-block;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;border-radius:999px;padding:3px 7px;font-size:12px}.warn{background:#fffbeb;color:#92400e;border-color:#fde68a}canvas{width:100%;max-width:900px;border:1px solid var(--line);border-radius:10px;background:#fff}@media print{.top,.noprint,summary:after,.btn,.bar{display:none!important}body{background:#fff}.section{border:0}.section summary{display:none}.content{padding:0}.out{border:0}.printOnly{display:block!important}}.printOnly{display:none}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.photo-card{border:1px solid #d1d5db;border-radius:12px;padding:8px;background:#fff}
+.photo-card img{width:100%;height:130px;object-fit:cover;border-radius:8px;border:1px solid #e5e7eb}
+.photo-card input,.photo-card select{margin-top:6px}
+.map-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.body-svg{width:100%;max-width:260px;background:#fff;border:1px solid #d1d5db;border-radius:12px}
+.body-part{fill:#eef2ff;stroke:#111827;stroke-width:1.6;cursor:pointer}
+.body-part:hover{fill:#dbeafe}
+.lesion-mark{pointer-events:none}
+.legend{font-size:12px;color:#374151;line-height:1.4}
+@media(max-width:700px){.map-wrap{grid-template-columns:1fr}}
+
+</style>
 </head>
 <body>
-<header class="top noprint"><h1>Atropelamento - Perícia de Campo <span class="pill">V6 • FCM</span></h1><div class="bar"><button onclick="expandAll(true)">Abrir seções</button><button onclick="expandAll(false)">Recolher</button><button onclick="getGPS()">GPS</button><button onclick="document.getElementById('pdfFile').click()">Ler PDF prévio</button><button onclick="generateAll()">Gerar minuta</button><button onclick="drawSketch()">Croqui</button><button onclick="exportJSON()">Exportar JSON</button><button onclick="document.getElementById('jsonFile').click()">Importar JSON</button><button onclick="window.print()">Gerar PDF</button><button class="danger" onclick="clearAll()">Apagar dados</button></div><div class="status" id="saveStatus">Salvamento automático ativo.</div></header>
+<header class="top noprint"><h1>Atropelamento - Perícia de Campo <span class="pill">V7 • FCM</span></h1><div class="bar"><button onclick="expandAll(true)">Abrir seções</button><button onclick="expandAll(false)">Recolher</button><button onclick="getGPS()">GPS</button><button onclick="document.getElementById('pdfFile').click()">Ler PDF prévio</button><button onclick="generateAll()">Gerar minuta</button><button onclick="drawSketch()">Croqui</button><button onclick="exportJSON()">Exportar JSON</button><button onclick="document.getElementById('jsonFile').click()">Importar JSON</button><button onclick="window.print()">Gerar PDF</button><button class="danger" onclick="clearAll()">Apagar dados</button></div><div class="status" id="saveStatus">Salvamento automático ativo.</div></header>
 <input id="pdfFile" type="file" accept="application/pdf" hidden onchange="readPDF(this.files[0])"><input id="jsonFile" type="file" accept="application/json" hidden onchange="importJSON(this.files[0])">
 <datalist id="delegaciasList"></datalist>
 <datalist id="autoridadesList">
@@ -58,7 +71,17 @@
 <details class="section"><summary>10. Veículo</summary><div class="content"><div class="grid"><div><label>Marca</label><input data-k="veiMarca"></div><div><label>Modelo</label><input data-k="veiModelo"></div><div><label>Cor</label><input data-k="veiCor"></div><div><label>Ano/modelo</label><input data-k="veiAno"></div><div><label>Placa</label><input data-k="veiPlaca"></div><div><label>Chassi</label><input data-k="veiChassi"></div><div><label>Município</label><input data-k="veiMunicipio"></div><div><label>Posição final</label><select data-k="veiPos"><option></option><option>Faixa de rolamento</option><option>Acostamento</option><option>Canteiro</option><option>Área externa à via</option></select></div><div><label>Orientação/sentido</label><input data-k="veiOrientacao"></div><div><label>Altura do dano principal</label><input data-k="alturaDano" placeholder="cm"></div><div><label>Extensão horizontal do dano</label><input data-k="larguraDano" placeholder="cm"></div><div><label>Região atingida principal</label><input data-k="regiaoDano"></div></div><h3>Danos</h3><div class="checks" data-group="danos"></div><h3>Material aderido</h3><div class="checks" data-group="aderido"></div><label>Descrição dos danos</label><textarea data-k="obsVeiculo"></textarea></div></details>
 <details class="section"><summary>11. Vítima</summary><div class="content"><div class="grid"><div><label>Nome</label><input data-k="vitNome"></div><div><label>RG</label><input data-k="vitRG"></div><div><label>CPF</label><input data-k="vitCPF"></div><div><label>Data de nascimento</label><input data-k="vitNasc" type="date"></div><div><label>Sexo</label><select data-k="vitSexo"><option></option><option>Masculino</option><option>Feminino</option><option>Não determinado</option></select></div><div><label>Idade aproximada</label><input data-k="vitIdade"></div><div><label>Estatura aproximada</label><input data-k="vitEstatura"></div><div><label>Decúbito</label><select data-k="decubito"><option></option><option>Dorsal</option><option>Ventral</option><option>Lateral direito</option><option>Lateral esquerdo</option></select></div><div><label>Orientação da cabeça</label><input data-k="cabeca"></div><div><label>Orientação dos pés</label><input data-k="pes"></div><div><label>Relação com a via</label><input data-k="relVia"></div><div><label>Relação com o veículo/obstáculos</label><input data-k="relVeiculo"></div></div><h3>Vestes</h3><div class="checks" data-group="vestes"></div><div class="grid"><div><label>Cor das vestes</label><input data-k="corVestes"></div><div><label>Integridade/rasgos/impregnação</label><input data-k="danosVestes"></div></div></div></details>
 <details class="section"><summary>12. Perinecroscopia</summary><div class="content"><div class="checks" data-group="lesoes"></div><label>Cabeça/face/cervical</label><textarea data-k="periCabeca"></textarea><label>Tronco anterior/posterior</label><textarea data-k="periTronco"></textarea><label>Membros superiores</label><textarea data-k="periMS"></textarea><label>Membros inferiores</label><textarea data-k="periMI"></textarea><label>Observações cadavéricas</label><textarea data-k="obsCadavericas"></textarea></div></details>
-<details class="section"><summary>13. Fotografias e legendas</summary><div class="content"><p class="small">Para manter o app rápido, o sistema registra número, categoria e legenda. As imagens devem ser mantidas na pasta/galeria da ocorrência.</p><button class="btn noprint" onclick="addRow('photos')">Adicionar fotografia</button><table id="photos"><thead><tr><th>Nº</th><th>Categoria</th><th>Legenda</th><th>Arquivo/ref.</th><th class="noprint"></th></tr></thead><tbody></tbody></table></div></details>
+<details class="section"><summary>13. Fotografias e legendas</summary><div class="content">
+<p class="small">As imagens ficam salvas no navegador deste aparelho. Para não deixar o app lento, use apenas as fotografias essenciais para o PDF/minuta.</p>
+<div class="toolbar">
+<button class="btn" type="button" onclick="document.getElementById('photoCamera').click()">📷 Fotografar</button>
+<button class="btn" type="button" onclick="document.getElementById('photoGallery').click()">🖼️ Galeria</button>
+<button class="btn danger" type="button" onclick="clearPhotos()">Limpar fotos</button>
+</div>
+<input id="photoCamera" type="file" accept="image/*" capture="environment" multiple hidden onchange="addPhotos(this.files)">
+<input id="photoGallery" type="file" accept="image/*" multiple hidden onchange="addPhotos(this.files)">
+<div id="photos" class="photo-grid"></div>
+</div></details>
 <details class="section"><summary>14. Cadeia de custódia e identificação cadavérica</summary><div class="content"><div class="checks" data-group="custodia"></div><div class="grid"><div><label>Número da PIC</label><input data-k="picNum"></div><div><label>Membro utilizado</label><input data-k="picMembro"></div><div><label>BIC</label><select data-k="bic"><option></option><option>Preenchido</option><option>Não preenchido</option></select></div><div><label>Destino/encaminhamento</label><input data-k="destino"></div></div><label>Observações</label><textarea data-k="obsCustodia"></textarea></div></details>
 <details class="section"><summary>15. Cadastros rápidos</summary><div class="content">
 <p class="small">Use esta seção apenas como consulta rápida. A seleção principal fica no painel 1.</p>
@@ -75,7 +98,7 @@
 <div id="pdfLog" class="small noprint"></div>
 </main>
 <script>
-const STORE='atropelamento_v6';
+const STORE='atropelamento_v7';
 const DELEGACIAS=[{"ais": "14", "circ": "96ª", "cidade": "AGRESTINA"}, {"ais": "14", "circ": "95ª", "cidade": "ALTINHO"}, {"ais": "14", "circ": "102ª", "cidade": "BARRA DE GUABIRABA"}, {"ais": "14", "circ": "91ª", "cidade": "BEZERROS"}, {"ais": "14", "circ": "92ª", "cidade": "BONITO"}, {"ais": "14", "circ": "100ª", "cidade": "CAMOCIM DE SÃO FÉLIX"}, {"ais": "14", "circ": "88ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "89ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "90ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "4ª DEAM", "cidade": "CARUARU"}, {"ais": "14", "circ": "7ª DPRN", "cidade": "CARUARU"}, {"ais": "14", "circ": "3ª DIVISÃO DE HOMICÍDIOS", "cidade": "CARUARU"}, {"ais": "14", "circ": "94ª", "cidade": "CUPIRA"}, {"ais": "14", "circ": "99ª", "cidade": "LAGOA DOS GATOS"}, {"ais": "14", "circ": "98ª", "cidade": "RIACHO DAS ALMAS"}, {"ais": "14", "circ": "101ª", "cidade": "SAIRÉ"}, {"ais": "14", "circ": "97ª", "cidade": "SÃO JOAQUIM DO MONTE"}, {"ais": "15", "circ": "104ª", "cidade": "BELO JARDIM"}, {"ais": "15", "circ": "106ª", "cidade": "SÃO BENTO DO UNA"}, {"ais": "15", "circ": "108ª", "cidade": "SÃO CAETANO"}, {"ais": "15", "circ": "109ª", "cidade": "CACHOEIRINHA"}, {"ais": "15", "circ": "110ª", "cidade": "SANHARÓ"}, {"ais": "15", "circ": "112ª", "cidade": "TACAIMBÓ"}, {"ais": "17", "circ": "107ª", "cidade": "BREJO DA MADRE DE DEUS"}, {"ais": "17", "circ": "111ª", "cidade": "JATAÚBA"}, {"ais": "17", "circ": "128ª", "cidade": "SANTA CRUZ DO CAPIBARIBE"}, {"ais": "17", "circ": "130ª", "cidade": "TAQUARITINGA DO NORTE"}, {"ais": "17", "circ": "129ª", "cidade": "TORITAMA"}, {"ais": "17", "circ": "131ª", "cidade": "VERTENTES"}];
 const groups={preservacao:['Local isolado','Preservação adequada','Corpo coberto antes da perícia','Veículo movimentado','Vestígios alterados','Presença de curiosos','Interferência de terceiros'],geometria:['Reta','Curva','Aclive','Declive','Canteiro central','Defensa metálica','Barreira de concreto New Jersey','Meio-fio','Área gramada','Vegetação','Talude'],visibilidade:['Chuva','Neblina','Pista molhada','Obstáculos visuais','Vegetação interferente','Curva restringindo visibilidade','Aclive restringindo visibilidade'],vestPos:['Fragmentos','Vidros','Plásticos','Metais','Sangue','Vestígios biológicos','Marcas pneumáticas','Frenagem','Derrapagem','Arrastamento','Sulcos','Impressões'],vestNeg:['Sem manchas hemáticas','Sem marcas de frenagem','Sem derrapagem','Sem arrastamento','Sem sulcos','Sem fragmentos relevantes','Sem vestígios biológicos aparentes'],condutor:['Identificado','Permaneceu no local','Apresentava lesões','Recebeu atendimento médico','Realizou teste de alcoolemia','Sinais aparentes de embriaguez'],danos:['Frontal','Frontal direita','Frontal esquerda','Lateral direita','Lateral esquerda','Traseira','Teto','Para-brisa','Coluna A','Retrovisores','Conjunto óptico','Capô','Para-lama','Para-choque'],aderido:['Sangue','Cabelo','Fibras','Tecido','Material biológico','Fragmentos ósseos','Gordura','Resíduos vegetais'],vestes:['Camisa','Calça','Bermuda','Vestido','Calçado','Rasgos','Impregnação hemática','Fragmentos têxteis'],lesoes:['Cabeça','Face','Região cervical','Tronco anterior','Tronco posterior','MSD','MSE','MID','MIE','Sangramento nasal','Otorragia','Fraturas aparentes','Fraturas expostas','Escoriações','Feridas abertas','Hematomas','Odor etílico percebido','Rigidez cadavérica','Hipóstases'],custodia:['Vestígio coletado','Vestígio descrito','Acondicionamento','Lacre','Encaminhamento','Exames complementares solicitados','PIC afixada','BIC preenchido']};
 
@@ -127,10 +150,110 @@ function renderDelegacias(q){
   }).join('');
 }
 
+
+function getState(){
+  const d={};
+  document.querySelectorAll('[data-k]').forEach(e=>d[e.dataset.k]=e.value);
+  d.checks=[...document.querySelectorAll('input[type=checkbox][data-c]:checked')].map(e=>e.dataset.c);
+  d.objects=objects||[]; d.measures=measures||[]; d.photos=photos||[]; d.lesions=lesions||[];
+  return d;
+}
+let photos=[], lesions=[];
+function fileToDataURL(file, maxW=1100, quality=.72){
+  return new Promise((resolve)=>{
+    const r=new FileReader();
+    r.onload=()=>{
+      const img=new Image();
+      img.onload=()=>{
+        const scale=Math.min(1, maxW/img.width);
+        const c=document.createElement('canvas');
+        c.width=Math.round(img.width*scale); c.height=Math.round(img.height*scale);
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+        resolve(c.toDataURL('image/jpeg', quality));
+      };
+      img.src=r.result;
+    };
+    r.readAsDataURL(file);
+  });
+}
+async function addPhotos(files){
+  for(const f of files){
+    if(!f.type.startsWith('image/')) continue;
+    const data=await fileToDataURL(f);
+    photos.push({src:data,cat:'Local',cap:''});
+  }
+  renderPhotos(); save();
+}
+function renderPhotos(){
+  const box=document.getElementById('photos'); if(!box) return;
+  box.innerHTML=photos.map((p,i)=>`<div class="photo-card">
+    <img src="${p.src}">
+    <select onchange="photos[${i}].cat=this.value;save()">
+      ${['Local','Vestígio','Veículo','Vítima','Documento','Croqui'].map(c=>`<option ${p.cat===c?'selected':''}>${c}</option>`).join('')}
+    </select>
+    <input value="${(p.cap||'').replaceAll('"','&quot;')}" placeholder="Legenda da fotografia ${i+1}" oninput="photos[${i}].cap=this.value;save()">
+    <button class="btn danger" type="button" onclick="photos.splice(${i},1);renderPhotos();save()">Remover</button>
+  </div>`).join('');
+}
+function clearPhotos(){ if(confirm('Apagar todas as fotografias salvas neste formulário?')){photos=[];renderPhotos();save()} }
+
+function lesionColor(t){
+  return {'Escoriação':'#dc2626','Hematoma':'#2563eb','Ferida':'#facc15','Fratura':'#111827','Fratura exposta':'#7c3aed','Sangramento':'#f97316'}[t]||'#dc2626';
+}
+function bodyClick(ev){
+  const target=ev.target.closest('.body-part'); if(!target) return;
+  const box=document.getElementById('bodyMap').getBoundingClientRect();
+  const pt=document.getElementById('bodyMap').createSVGPoint();
+  pt.x=ev.clientX; pt.y=ev.clientY;
+  const p=pt.matrixTransform(document.getElementById('bodyMap').getScreenCTM().inverse());
+  const type=document.getElementById('lesionType').value;
+  lesions.push({part:target.dataset.part,type,x:Math.round(p.x),y:Math.round(p.y)});
+  renderLesions(); save();
+}
+function renderLesions(){
+  const layer=document.getElementById('lesionLayer');
+  if(layer){
+    layer.innerHTML=lesions.map((l,i)=>`<g class="lesion-mark">
+      <circle cx="${l.x}" cy="${l.y}" r="7" fill="${lesionColor(l.type)}" stroke="#fff" stroke-width="2"/>
+      <text x="${l.x}" y="${l.y+4}" font-size="9" text-anchor="middle" fill="#fff">${i+1}</text>
+    </g>`).join('');
+  }
+  const tb=document.getElementById('lesionsTable');
+  if(tb) tb.innerHTML=lesions.map((l,i)=>`<tr><td>${i+1}. ${l.part}</td><td>${l.type}</td><td class="noprint"><button class="btn danger" type="button" onclick="lesions.splice(${i},1);renderLesions();save()">X</button></td></tr>`).join('');
+}
+function clearLesions(){ if(confirm('Limpar o mapa anatômico?')){lesions=[];renderLesions();save()} }
+function lesionText(){
+  if(!lesions.length) return '';
+  return 'Mapa anatômico: '+lesions.map((l,i)=>`${i+1}) ${l.type} em ${l.part}`).join('; ')+'.';
+}
+function photosText(){
+  return photos.map((p,i)=>`Fotografia ${i+1}: ${p.cap||p.cat||'registro fotográfico'}.`).join('\n');
+}
+function generatePDF(){
+  document.querySelectorAll('details').forEach(d=>d.open=true);
+  generateAll();
+  const oldTitle=document.title; document.title='Atropelamento_FCM';
+  window.print();
+  document.title=oldTitle;
+}
+
 function initChecks(){for(const g in groups){const box=document.querySelector(`[data-group="${g}"]`);if(!box)continue;box.innerHTML=groups[g].map(v=>`<label class="check"><input type="checkbox" data-g="${g}" value="${v}"><span>${v}</span></label>`).join('')}}
 function data(){const o={fields:{},checks:{},tables:{}};document.querySelectorAll('[data-k]').forEach(e=>o.fields[e.dataset.k]=e.value);document.querySelectorAll('[data-g]').forEach(e=>{(o.checks[e.dataset.g]??=[]);if(e.checked)o.checks[e.dataset.g].push(e.value)});['objects','measures','photos'].forEach(id=>{o.tables[id]=[...document.querySelectorAll(`#${id} tbody tr`)].map(tr=>[...tr.querySelectorAll('input,select,textarea')].map(i=>i.value))});o.generated={summary:document.getElementById('summaryOut').innerText,draft:document.getElementById('draftOut').innerText};return o}
-function save(){localStorage.setItem(STORE,JSON.stringify(data()));document.getElementById('saveStatus').textContent='Salvo automaticamente: '+new Date().toLocaleTimeString()}
-function load(){const raw=localStorage.getItem(STORE);if(!raw)return;try{const o=JSON.parse(raw);Object.entries(o.fields||{}).forEach(([k,v])=>{let e=document.querySelector(`[data-k="${k}"]`);if(e)e.value=v});Object.entries(o.checks||{}).forEach(([g,arr])=>document.querySelectorAll(`[data-g="${g}"]`).forEach(e=>e.checked=arr.includes(e.value)));['objects','measures','photos'].forEach(id=>(o.tables?.[id]||[]).forEach(r=>addRow(id,r)));if(o.generated){summaryOut.innerText=o.generated.summary||'';draftOut.innerText=o.generated.draft||''}toggleDelegaciaPanel();}catch(e){}}
+function save(){
+  const d=getState();
+  d.generated={summary:summaryOut?.innerText||'',draft:draftOut?.innerText||''};
+  localStorage.setItem(STORE,JSON.stringify(d));
+}
+function load(){
+  try{
+    const d=JSON.parse(localStorage.getItem(STORE)||'{}');
+    document.querySelectorAll('[data-k]').forEach(e=>{if(d[e.dataset.k]!=null)e.value=d[e.dataset.k]});
+    document.querySelectorAll('input[type=checkbox][data-c]').forEach(e=>e.checked=(d.checks||[]).includes(e.dataset.c));
+    objects=d.objects||objects||[]; measures=d.measures||measures||[];
+    photos=d.photos||[]; lesions=d.lesions||[];
+    toggleDelegaciaPanel(); renderObjects?.(); renderMeasures?.(); renderPhotos(); renderLesions(); drawSketch?.(); generateAll();
+  }catch(e){console.warn(e)}
+}).forEach(([k,v])=>{let e=document.querySelector(`[data-k="${k}"]`);if(e)e.value=v});Object.entries(o.checks||{}).forEach(([g,arr])=>document.querySelectorAll(`[data-g="${g}"]`).forEach(e=>e.checked=arr.includes(e.value)));['objects','measures','photos'].forEach(id=>(o.tables?.[id]||[]).forEach(r=>addRow(id,r)));if(o.generated){summaryOut.innerText=o.generated.summary||'';draftOut.innerText=o.generated.draft||''}toggleDelegaciaPanel();}catch(e){}}
 function addRow(id,vals=[]){const tr=document.createElement('tr');let cells={objects:['selectObj','text','text','text','text'],measures:['text','text','text','text'],photos:['text','selectPhoto','text','text']}[id];tr.innerHTML=cells.map((t,i)=>`<td>${inputByType(t,vals[i]||'')}</td>`).join('')+`<td class="noprint"><button class="rowbtn" onclick="this.closest('tr').remove();save()">X</button></td>`;document.querySelector(`#${id} tbody`).appendChild(tr);tr.querySelectorAll('input,select,textarea').forEach(e=>e.addEventListener('input',save));save()}
 function inputByType(t,v){if(t==='selectObj')return `<select><option>${v}</option><option>Sandália</option><option>Boné</option><option>Celular</option><option>Carteira</option><option>Mochila</option><option>Documento</option><option>Outro</option></select>`;if(t==='selectPhoto')return `<select><option>${v}</option><option>Local</option><option>Veículo</option><option>Vítima</option><option>Vestígio</option><option>Documento</option><option>Croqui</option></select>`;return `<input value="${String(v).replaceAll('&','&amp;').replaceAll('"','&quot;')}">`}
 function val(k){return document.querySelector(`[data-k="${k}"]`)?.value?.trim()||''}function chk(g){return [...document.querySelectorAll(`[data-g="${g}"]:checked`)].map(e=>e.value)}function line(s){return s? s+'\n':''}function sentence(parts){return parts.filter(Boolean).join(', ')}
@@ -154,7 +277,11 @@ function copyDraft(){navigator.clipboard.writeText(document.getElementById('draf
 function getGPS(){if(!navigator.geolocation)return alert('GPS indisponível.');navigator.geolocation.getCurrentPosition(p=>{document.querySelector('[data-k="lat"]').value=p.coords.latitude.toFixed(6);document.querySelector('[data-k="lng"]').value=p.coords.longitude.toFixed(6);document.querySelector('[data-k="metodoGPS"]').value='GPS do aparelho';save()},e=>alert('Não foi possível obter GPS: '+e.message),{enableHighAccuracy:true,timeout:12000})}
 function exportJSON(){const blob=new Blob([JSON.stringify(data(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='atropelamento_'+(val('rep')||Date.now())+'.json';a.click()}
 function importJSON(file){if(!file)return;const r=new FileReader();r.onload=()=>{localStorage.setItem(STORE,r.result);location.reload()};r.readAsText(file)}
-function clearAll(){if(confirm('Apagar definitivamente os dados salvos neste aparelho?')){localStorage.removeItem(STORE);location.reload()}}
+function clearAll(){
+  if(confirm('Apagar todos os dados deste formulário?')){
+    localStorage.removeItem(STORE); location.reload();
+  }
+}}
 function expandAll(open){document.querySelectorAll('details').forEach(d=>d.open=open)}
 async function readPDF(file){if(!file)return;const log=document.getElementById('pdfLog');log.textContent='Lendo PDF...';try{if(!window.pdfjsLib){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'}const buf=await file.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:buf}).promise;let text='';for(let p=1;p<=pdf.numPages;p++){const page=await pdf.getPage(p);const cont=await page.getTextContent();text+=cont.items.map(i=>i.str).join(' ')+'\n'}autoFill(text);log.textContent='PDF lido. Campos possíveis foram preenchidos. Revise antes de usar.'}catch(e){log.textContent='Não foi possível ler o PDF. A leitura usa PDF.js; abra uma vez com internet para carregar a biblioteca, depois tente novamente.'}}
 function loadScript(src){return new Promise((res,rej)=>{let s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
