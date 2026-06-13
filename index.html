@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atropelamento - Registro Pericial</title>
+  <meta name="theme-color" content="#1f4e79">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Atropelamento">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <style>
+    :root{--bg:#f4f6f8;--card:#fff;--txt:#1f2937;--muted:#6b7280;--line:#d8dee6;--pri:#1f4e79;--pri2:#173b5c;--ok:#166534;--bad:#991b1b}
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);font-size:14px}.wrap{max-width:1100px;margin:auto;padding:16px}header{background:var(--pri);color:white;padding:16px;border-radius:10px;margin-bottom:14px}h1{font-size:22px;margin:0 0 6px}.sub{opacity:.9}section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;break-inside:avoid}h2{font-size:17px;margin:0 0 12px;color:var(--pri)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 14px}.field{display:flex;flex-direction:column;gap:4px}label{font-weight:700}.hint{font-size:12px;color:var(--muted);line-height:1.25}input,select,textarea{width:100%;padding:9px;border:1px solid #bcc6d2;border-radius:7px;font:inherit;background:white}textarea{min-height:72px;resize:vertical}.buttons{position:sticky;bottom:0;background:rgba(244,246,248,.95);display:flex;flex-wrap:wrap;gap:8px;padding:10px 0;border-top:1px solid var(--line)}button,.filebtn{border:0;border-radius:7px;padding:10px 12px;background:var(--pri);color:white;font-weight:700;cursor:pointer}button:hover,.filebtn:hover{background:var(--pri2)}button.secondary{background:#374151}button.danger{background:var(--bad)}button.ok{background:var(--ok)}.status{font-size:12px;color:var(--muted);margin-top:6px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hidden{display:none}.footer-note{font-size:12px;color:var(--muted);margin:10px 0}.print-title{display:none}@media(max-width:700px){.two{grid-template-columns:1fr}.wrap{padding:10px}}@media print{body{background:white}.wrap{max-width:none;padding:0}header,.buttons,.no-print{display:none}.print-title{display:block;text-align:center;margin-bottom:12px}section{border:1px solid #999;margin:8px 0;padding:10px}input,select,textarea{border:0;border-bottom:1px solid #aaa;border-radius:0;padding:3px}.hint{font-size:10px}.grid{grid-template-columns:repeat(2,1fr);gap:6px 12px}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Atropelamento - Registro Pericial de Campo</h1>
+    <div class="sub">Formulário objetivo para registro de via, visibilidade, sítio de interação, veículo, vítima e dispersão de vestígios.</div>
+  </header>
+  <h1 class="print-title">Atropelamento - Registro Pericial de Campo</h1>
+
+  <form id="form">
+    <section>
+      <h2>Identificação do atendimento</h2>
+      <div class="grid">
+        <div class="field"><label>Data</label><input type="date" name="data"><div class="hint">Data do exame no local.</div></div>
+        <div class="field"><label>Hora</label><input type="time" name="hora"><div class="hint">Horário aproximado de chegada/início dos exames.</div></div>
+        <div class="field"><label>Local</label><input name="local" placeholder="Rodovia, km, bairro ou referência"><div class="hint">Referência espacial objetiva do local.</div></div>
+        <div class="field"><label>Coordenadas GPS</label><div class="two"><input name="gps" placeholder="Latitude, Longitude"><button type="button" class="ok no-print" onclick="pegarGPS()">Pegar GPS</button></div><div class="hint">Registre coordenadas do ponto principal da ocorrência ou do corpo.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Geometria da via</h2>
+      <div class="grid">
+        <div class="field"><label>Sentido da via</label><select name="sentido_via"><option></option><option>Mão única</option><option>Mão dupla</option><option>Pista dupla</option><option>Via marginal</option><option>Outro</option></select><div class="hint">Define a organização do fluxo e ajuda a interpretar trajetórias.</div></div>
+        <div class="field"><label>Número de faixas</label><input name="numero_faixas" type="number" min="0" step="1"><div class="hint">Quantidade de faixas no trecho examinado.</div></div>
+        <div class="field"><label>Largura das faixas</label><input name="largura_faixas" placeholder="Ex.: 3,50 m"><div class="hint">Mede o espaço útil de circulação dos veículos.</div></div>
+        <div class="field"><label>Largura do acostamento</label><input name="largura_acostamento" placeholder="Ex.: 1,80 m"><div class="hint">Indica área lateral disponível para pedestres, parada ou evasão.</div></div>
+        <div class="field"><label>Tipo de pavimento</label><select name="tipo_pavimento"><option></option><option>Asfalto</option><option>Concreto</option><option>Paralelepípedo</option><option>Terra</option><option>Cascalho</option><option>Outro</option></select><div class="hint">Interfere em aderência, marcas e distância de frenagem.</div></div>
+        <div class="field"><label>Condição do pavimento</label><select name="condicao_pavimento"><option></option><option>Seco</option><option>Molhado</option><option>Úmido</option><option>Com óleo</option><option>Com areia/barro</option><option>Irregular</option></select><div class="hint">Afeta aderência, visibilidade de marcas e dinâmica veicular.</div></div>
+        <div class="field"><label>Velocidade regulamentada</label><input name="velocidade_reg" placeholder="Ex.: 60 km/h"><div class="hint">Velocidade sinalizada para o trecho.</div></div>
+        <div class="field"><label>Posição da defensa</label><input name="defensa" placeholder="Ex.: lado direito, a 1,2 m da borda"><div class="hint">Defensa pode limitar deslocamento, ocultar vestígios ou servir de referência.</div></div>
+        <div class="field"><label>Posição do canteiro</label><input name="canteiro" placeholder="Ex.: central, largura 2,0 m"><div class="hint">Auxilia a avaliar travessia, origem provável e barreiras físicas.</div></div>
+        <div class="field"><label>Declividade transversal</label><input name="declividade" placeholder="Ex.: caída para acostamento"><div class="hint">Inclinação lateral; pode influenciar escoamento de líquidos e dispersão.</div></div>
+        <div class="field"><label>Aclive/declive longitudinal</label><select name="aclive_declive"><option></option><option>Plano</option><option>Aclive</option><option>Declive</option><option>Topo de aclive</option><option>Fundo de vale</option><option>Não determinado</option></select><div class="hint">Inclinação no sentido da via; interfere em visibilidade e frenagem.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Visibilidade, iluminação e sinalização</h2>
+      <div class="grid">
+        <div class="field"><label>Tipo de iluminação</label><select name="tipo_iluminacao"><option></option><option>Dia</option><option>Noite</option><option>Crepúsculo</option><option>Amanhecer</option><option>Ambiente escuro</option></select><div class="hint">Condição luminosa geral no momento aproximado do fato/exame.</div></div>
+        <div class="field"><label>Iluminação pública</label><select name="iluminacao_publica"><option></option><option>Existente e funcional</option><option>Existente, porém deficiente</option><option>Existente, não funcional</option><option>Ausente</option><option>Não avaliada</option></select><div class="hint">Importante para percepção do pedestre pelo condutor.</div></div>
+        <div class="field"><label>Condições climáticas</label><select name="clima"><option></option><option>Céu claro</option><option>Nublado</option><option>Chuva</option><option>Garoa</option><option>Neblina</option><option>Após chuva</option><option>Outro</option></select><div class="hint">Pode afetar visibilidade, aderência e preservação de vestígios.</div></div>
+        <div class="field"><label>Obstáculos visuais</label><textarea name="obstaculos" placeholder="Veículos, placas, muros, construções..."></textarea><div class="hint">Elementos que reduzem o campo visual do condutor ou pedestre.</div></div>
+        <div class="field"><label>Vegetação</label><select name="vegetacao"><option></option><option>Ausente</option><option>Baixa, sem interferência</option><option>Alta, com possível interferência</option><option>Invadindo acostamento/pista</option><option>Não avaliada</option></select><div class="hint">Pode ocultar pedestre, objetos ou marcas.</div></div>
+        <div class="field"><label>Curvas</label><select name="curvas"><option></option><option>Trecho retilíneo</option><option>Curva suave</option><option>Curva acentuada</option><option>Curva à direita</option><option>Curva à esquerda</option></select><div class="hint">Curvas reduzem linha de visada e tempo de percepção.</div></div>
+        <div class="field"><label>Aclives com interferência visual</label><select name="aclives_visuais"><option></option><option>Ausentes</option><option>Presentes, sem interferência aparente</option><option>Presentes, com interferência visual</option><option>Não determinado</option></select><div class="hint">Topo de aclive pode ocultar pedestre ou veículo até curta distância.</div></div>
+        <div class="field"><label>Faixa de pedestres</label><select name="faixa_pedestre"><option></option><option>Existente próxima</option><option>Existente no ponto</option><option>Ausente</option><option>Apagada/deficiente</option><option>Não avaliada</option></select><div class="hint">Relevante para análise do local de travessia.</div></div>
+        <div class="field"><label>Sinalização vertical e horizontal</label><textarea name="sinalizacao" placeholder="Placas, marcas de pista, tachões, semáforo..."></textarea><div class="hint">Registre existência, estado de conservação e pertinência ao trecho.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Sítio de interação e vestígios</h2>
+      <div class="grid">
+        <div class="field"><label>Fragmentos</label><textarea name="fragmentos" placeholder="Tipo, quantidade e posição"></textarea><div class="hint">Podem indicar região provável do primeiro contato.</div></div>
+        <div class="field"><label>Sangue</label><textarea name="sangue" placeholder="Manchas, concentração, arraste, gotejamento"></textarea><div class="hint">Ajuda a diferenciar ponto de impacto, repouso ou deslocamento.</div></div>
+        <div class="field"><label>Objetos da vítima</label><textarea name="objetos_vitima" placeholder="Sandália, boné, celular, mochila..."></textarea><div class="hint">Dispersão dos objetos auxilia na direção e energia da projeção.</div></div>
+        <div class="field"><label>Marcas pneumáticas</label><textarea name="marcas_pneumaticas" placeholder="Frenagem, derrapagem, arraste, ausência"></textarea><div class="hint">Indicam manobras, perda de controle ou frenagem.</div></div>
+        <div class="field"><label>Vestígios biológicos</label><textarea name="vestigios_biologicos" placeholder="Cabelos, tecidos, fluidos..."></textarea><div class="hint">Podem confirmar contato veículo-vítima ou ponto de interação.</div></div>
+        <div class="field"><label>Distância sítio de interação-corpo</label><input name="dist_sitio_corpo" placeholder="Ex.: 18,4 m"><div class="hint">Medida essencial para estimar projeção pós-impacto.</div></div>
+        <div class="field"><label>Distância sítio-primeiro fragmento</label><input name="dist_sitio_fragmento" placeholder="Ex.: 2,1 m"><div class="hint">Ajuda a fixar o início da dispersão veicular.</div></div>
+        <div class="field"><label>Distância sítio-primeira mancha de sangue</label><input name="dist_sitio_sangue" placeholder="Ex.: 0,8 m"><div class="hint">Relaciona vestígio hemático ao ponto provável de interação.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Veículo</h2>
+      <div class="grid">
+        <div class="field"><label>Sentido de deslocamento do veículo</label><input name="sentido_veiculo" placeholder="Ex.: bairro-centro, norte-sul"><div class="hint">Direção declarada ou inferida por vestígios.</div></div>
+        <div class="field"><label>Região impactada</label><select name="regiao_impactada"><option></option><option>Para-choque dianteiro</option><option>Capô</option><option>Para-brisa</option><option>Coluna A</option><option>Retrovisor</option><option>Lateral</option><option>Parte inferior</option><option>Não determinada</option><option>Outra</option></select><div class="hint">Parte do veículo que apresenta dano/vestígio relacionado.</div></div>
+        <div class="field"><label>Altura do dano</label><input name="altura_dano" placeholder="Ex.: 72 cm do solo"><div class="hint">Auxilia correlação com região corporal atingida.</div></div>
+        <div class="field"><label>Largura/extensão do dano</label><input name="largura_dano" placeholder="Ex.: 48 cm"><div class="hint">Delimita a área de contato ou deformação.</div></div>
+        <div class="field"><label>Material aderido</label><textarea name="material_aderido" placeholder="Sangue, cabelo, tecido, tinta, poeira..."></textarea><div class="hint">Transferência material pode confirmar contato.</div></div>
+        <div class="field"><label>Observações do veículo</label><textarea name="obs_veiculo" placeholder="Conservação, avarias preexistentes, posição final..."></textarea><div class="hint">Separe danos recentes de danos sem relação aparente.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Vítima</h2>
+      <div class="grid">
+        <div class="field"><label>Posição final</label><textarea name="posicao_final" placeholder="Ex.: decúbito dorsal sobre a faixa direita"></textarea><div class="hint">Local onde o corpo foi encontrado.</div></div>
+        <div class="field"><label>Orientação do corpo</label><input name="orientacao_corpo" placeholder="Ex.: cabeça voltada para Recife"><div class="hint">Relação cabeça-pés com a via ou pontos cardeais.</div></div>
+        <div class="field"><label>Sentido de deslocamento da vítima</label><input name="sentido_vitima" placeholder="Ex.: acostamento para canteiro"><div class="hint">Direção de caminhada/travessia, quando inferível.</div></div>
+        <div class="field"><label>Lesões predominantes</label><textarea name="lesoes" placeholder="Cabeça, membros inferiores, tronco..."></textarea><div class="hint">Descrição externa preliminar, sem extrapolar causa médica.</div></div>
+        <div class="field"><label>Vestes</label><textarea name="vestes" placeholder="Tipo, cor e estado das roupas"></textarea><div class="hint">Cores e danos nas vestes podem auxiliar visibilidade e correlação com o veículo.</div></div>
+        <div class="field"><label>Objetos pessoais</label><textarea name="objetos_pessoais" placeholder="Carteira, documentos, chaves, celular..."></textarea><div class="hint">Registre se estavam junto ao corpo ou dispersos.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Dispersão de vestígios</h2>
+      <div class="grid">
+        <div class="field"><label>Distância objeto-corpo</label><input name="dist_objeto_corpo" placeholder="Ex.: sandália a 12,5 m"><div class="hint">Ajuda a interpretar projeção e sequência de eventos.</div></div>
+        <div class="field"><label>Distância corpo-veículo</label><input name="dist_corpo_veiculo" placeholder="Ex.: 45 m"><div class="hint">Relaciona repouso do corpo à posição final do veículo.</div></div>
+        <div class="field"><label>Distância fragmento-corpo</label><input name="dist_fragmento_corpo" placeholder="Ex.: 7,2 m"><div class="hint">Contribui para localizar o sítio de interação.</div></div>
+        <div class="field"><label>Referência das medições</label><textarea name="referencia_medicoes" placeholder="Ex.: borda direita da pista, marco km, poste..."></textarea><div class="hint">Indique a origem e os eixos usados nas medições.</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Resumo pericial preliminar</h2>
+      <div class="field"><label>Observações gerais</label><textarea name="observacoes" placeholder="Síntese objetiva do que foi constatado, sem conclusões não sustentadas."></textarea><div class="hint">Campo livre para observações, limitações e ressalvas técnicas.</div></div>
+    </section>
+  </form>
+
+  <div class="buttons no-print">
+    <button type="button" id="instalarApp" onclick="instalarApp()" style="display:none">Instalar app</button>
+    <button type="button" onclick="window.print()">Gerar PDF</button>
+    <button type="button" class="secondary" onclick="baixarJSON()">Exportar dados</button>
+    <label class="filebtn">Importar dados<input id="importar" type="file" accept="application/json" class="hidden"></label>
+    <button type="button" class="secondary" onclick="preencherDataHora()">Data/hora atual</button>
+    <button type="button" class="danger" onclick="limparDados()">Apagar dados</button>
+  </div>
+  <div id="status" class="status no-print">Salvamento automático ativo. Os dados ficam neste navegador até você apagá-los.</div>
+  <div class="footer-note no-print">Dica: use “Exportar dados” para guardar uma cópia do preenchimento fora do navegador.</div>
+</div>
+<script>
+(function(){
+  const KEY='atropelamento_v3';
+  const form=document.getElementById('form');
+  const status=document.getElementById('status');
+  const setStatus=t=>{status.textContent=t};
+  const fields=()=>Array.from(form.querySelectorAll('input,select,textarea'));
+  const data=()=>Object.fromEntries(fields().map(e=>[e.name,e.value]));
+  const fill=o=>fields().forEach(e=>{if(o&&Object.prototype.hasOwnProperty.call(o,e.name))e.value=o[e.name]||''});
+  const save=()=>{localStorage.setItem(KEY,JSON.stringify(data()));setStatus('Dados salvos automaticamente neste navegador.')};
+  try{fill(JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+  form.addEventListener('input',save);
+  form.addEventListener('change',save);
+  window.baixarJSON=function(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data(),null,2)],{type:'application/json'}));a.download='atropelamento-dados.json';a.click();URL.revokeObjectURL(a.href)};
+  document.getElementById('importar').addEventListener('change',ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{fill(JSON.parse(r.result));save()}catch(e){alert('Arquivo JSON inválido.')}};r.readAsText(f)});
+  window.limparDados=function(){if(confirm('Apagar todos os dados salvos deste formulário?')){localStorage.removeItem(KEY);form.reset();setStatus('Dados apagados a pedido do usuário.')}};
+  window.preencherDataHora=function(){const d=new Date();form.data.value=d.toISOString().slice(0,10);form.hora.value=d.toTimeString().slice(0,5);save()};
+  window.pegarGPS=function(){if(!navigator.geolocation){alert('Geolocalização não suportada neste navegador.');return}setStatus('Obtendo GPS...');navigator.geolocation.getCurrentPosition(p=>{form.gps.value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6);save();setStatus('GPS preenchido e salvo.')},e=>{alert('Não foi possível obter o GPS. Verifique permissão/localização do navegador.');setStatus('GPS não preenchido.')},{enableHighAccuracy:true,timeout:12000,maximumAge:0})};
+})();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('instalarApp');
+  if (btn) btn.style.display = 'inline-block';
+});
+async function instalarApp(){
+  if (!deferredPrompt) return alert('No celular, use o menu do navegador e escolha "Adicionar à tela inicial".');
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  const btn = document.getElementById('instalarApp');
+  if (btn) btn.style.display = 'none';
+}
+</script>
+</body>
+</html>
