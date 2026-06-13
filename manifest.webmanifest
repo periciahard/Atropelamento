@@ -1,14 +1,1 @@
-{
-  "name": "Atropelamento - Registro Pericial",
-  "short_name": "Atropelamento",
-  "description": "Formulário pericial de campo para locais de atropelamento, com salvamento local e geração de PDF.",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#f4f6f8",
-  "theme_color": "#1f4e79",
-  "orientation": "portrait-primary",
-  "icons": [
-    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
-  ]
-}
+{"name":"Atropelamento - Perícia","short_name":"Atropelamento","start_url":"./","display":"standalone","background_color":"#f5f7fb","theme_color":"#111827","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}
