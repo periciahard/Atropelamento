@@ -13,7 +13,7 @@
 :root{--bg:#f5f7fb;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#d1d5db;--main:#111827;--ok:#065f46;--warn:#92400e}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;font-size:15px}.top{position:sticky;top:0;z-index:10;background:var(--main);color:white;padding:10px 12px;box-shadow:0 2px 8px #0003}.top h1{font-size:18px;margin:0 0 8px}.bar{display:flex;gap:6px;overflow:auto}.bar button,.btn{border:0;border-radius:8px;padding:9px 11px;background:#e5e7eb;color:#111827;font-weight:700;white-space:nowrap}.bar button{background:#374151;color:#fff}.bar button.danger{background:#7f1d1d}.wrap{max-width:1100px;margin:auto;padding:12px}.status{font-size:12px;color:#d1d5db}.wide{grid-column:1/-1}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.section{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.section summary{cursor:pointer;padding:13px 14px;font-weight:800;background:#eef2ff;border-bottom:1px solid var(--line)}.content{padding:12px}label{display:block;font-size:12px;color:#374151;font-weight:700;margin:6px 0 3px}.hint{font-size:11px;color:var(--muted);font-weight:400}input,select,textarea{width:100%;padding:9px;border:1px solid #cbd5e1;border-radius:8px;background:white;font:inherit}textarea{min-height:70px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px;margin:8px 0}.check{display:flex;gap:7px;align-items:center;background:#f9fafb;border:1px solid #e5e7eb;border-radius:8px;padding:7px}.check input{width:auto}table{width:100%;border-collapse:collapse;margin-top:8px;background:white}th,td{border:1px solid var(--line);padding:6px;text-align:left;vertical-align:top}th{background:#f3f4f6}.small{font-size:12px;color:var(--muted)}.rowbtn{padding:6px 8px;border-radius:6px;border:0;background:#fee2e2;color:#7f1d1d}.out{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;min-height:160px}.pill{display:inline-block;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;border-radius:999px;padding:3px 7px;font-size:12px}.warn{background:#fffbeb;color:#92400e;border-color:#fde68a}canvas{width:100%;max-width:900px;border:1px solid var(--line);border-radius:10px;background:#fff}@media print{.top,.noprint,summary:after,.btn,.bar{display:none!important}body{background:#fff}.section{border:0}.section summary{display:none}.content{padding:0}.out{border:0}.printOnly{display:block!important}}.printOnly{display:none}</style>
 </head>
 <body>
-<header class="top noprint"><h1>Atropelamento - Perícia de Campo <span class="pill">V5 • FCM</span></h1><div class="bar"><button onclick="expandAll(true)">Abrir seções</button><button onclick="expandAll(false)">Recolher</button><button onclick="getGPS()">GPS</button><button onclick="document.getElementById('pdfFile').click()">Ler PDF prévio</button><button onclick="generateAll()">Gerar minuta</button><button onclick="drawSketch()">Croqui</button><button onclick="exportJSON()">Exportar JSON</button><button onclick="document.getElementById('jsonFile').click()">Importar JSON</button><button onclick="window.print()">Gerar PDF</button><button class="danger" onclick="clearAll()">Apagar dados</button></div><div class="status" id="saveStatus">Salvamento automático ativo.</div></header>
+<header class="top noprint"><h1>Atropelamento - Perícia de Campo <span class="pill">V6 • FCM</span></h1><div class="bar"><button onclick="expandAll(true)">Abrir seções</button><button onclick="expandAll(false)">Recolher</button><button onclick="getGPS()">GPS</button><button onclick="document.getElementById('pdfFile').click()">Ler PDF prévio</button><button onclick="generateAll()">Gerar minuta</button><button onclick="drawSketch()">Croqui</button><button onclick="exportJSON()">Exportar JSON</button><button onclick="document.getElementById('jsonFile').click()">Importar JSON</button><button onclick="window.print()">Gerar PDF</button><button class="danger" onclick="clearAll()">Apagar dados</button></div><div class="status" id="saveStatus">Salvamento automático ativo.</div></header>
 <input id="pdfFile" type="file" accept="application/pdf" hidden onchange="readPDF(this.files[0])"><input id="jsonFile" type="file" accept="application/json" hidden onchange="importJSON(this.files[0])">
 <datalist id="delegaciasList"></datalist>
 <datalist id="autoridadesList">
@@ -75,55 +75,62 @@
 <div id="pdfLog" class="small noprint"></div>
 </main>
 <script>
-const STORE='atropelamento_v3';
+const STORE='atropelamento_v6';
+const DELEGACIAS=[{"ais": "14", "circ": "96ª", "cidade": "AGRESTINA"}, {"ais": "14", "circ": "95ª", "cidade": "ALTINHO"}, {"ais": "14", "circ": "102ª", "cidade": "BARRA DE GUABIRABA"}, {"ais": "14", "circ": "91ª", "cidade": "BEZERROS"}, {"ais": "14", "circ": "92ª", "cidade": "BONITO"}, {"ais": "14", "circ": "100ª", "cidade": "CAMOCIM DE SÃO FÉLIX"}, {"ais": "14", "circ": "88ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "89ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "90ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "4ª DEAM", "cidade": "CARUARU"}, {"ais": "14", "circ": "7ª DPRN", "cidade": "CARUARU"}, {"ais": "14", "circ": "3ª DIVISÃO DE HOMICÍDIOS", "cidade": "CARUARU"}, {"ais": "14", "circ": "94ª", "cidade": "CUPIRA"}, {"ais": "14", "circ": "99ª", "cidade": "LAGOA DOS GATOS"}, {"ais": "14", "circ": "98ª", "cidade": "RIACHO DAS ALMAS"}, {"ais": "14", "circ": "101ª", "cidade": "SAIRÉ"}, {"ais": "14", "circ": "97ª", "cidade": "SÃO JOAQUIM DO MONTE"}, {"ais": "15", "circ": "104ª", "cidade": "BELO JARDIM"}, {"ais": "15", "circ": "106ª", "cidade": "SÃO BENTO DO UNA"}, {"ais": "15", "circ": "108ª", "cidade": "SÃO CAETANO"}, {"ais": "15", "circ": "109ª", "cidade": "CACHOEIRINHA"}, {"ais": "15", "circ": "110ª", "cidade": "SANHARÓ"}, {"ais": "15", "circ": "112ª", "cidade": "TACAIMBÓ"}, {"ais": "17", "circ": "107ª", "cidade": "BREJO DA MADRE DE DEUS"}, {"ais": "17", "circ": "111ª", "cidade": "JATAÚBA"}, {"ais": "17", "circ": "128ª", "cidade": "SANTA CRUZ DO CAPIBARIBE"}, {"ais": "17", "circ": "130ª", "cidade": "TAQUARITINGA DO NORTE"}, {"ais": "17", "circ": "129ª", "cidade": "TORITAMA"}, {"ais": "17", "circ": "131ª", "cidade": "VERTENTES"}];
 const groups={preservacao:['Local isolado','Preservação adequada','Corpo coberto antes da perícia','Veículo movimentado','Vestígios alterados','Presença de curiosos','Interferência de terceiros'],geometria:['Reta','Curva','Aclive','Declive','Canteiro central','Defensa metálica','Barreira de concreto New Jersey','Meio-fio','Área gramada','Vegetação','Talude'],visibilidade:['Chuva','Neblina','Pista molhada','Obstáculos visuais','Vegetação interferente','Curva restringindo visibilidade','Aclive restringindo visibilidade'],vestPos:['Fragmentos','Vidros','Plásticos','Metais','Sangue','Vestígios biológicos','Marcas pneumáticas','Frenagem','Derrapagem','Arrastamento','Sulcos','Impressões'],vestNeg:['Sem manchas hemáticas','Sem marcas de frenagem','Sem derrapagem','Sem arrastamento','Sem sulcos','Sem fragmentos relevantes','Sem vestígios biológicos aparentes'],condutor:['Identificado','Permaneceu no local','Apresentava lesões','Recebeu atendimento médico','Realizou teste de alcoolemia','Sinais aparentes de embriaguez'],danos:['Frontal','Frontal direita','Frontal esquerda','Lateral direita','Lateral esquerda','Traseira','Teto','Para-brisa','Coluna A','Retrovisores','Conjunto óptico','Capô','Para-lama','Para-choque'],aderido:['Sangue','Cabelo','Fibras','Tecido','Material biológico','Fragmentos ósseos','Gordura','Resíduos vegetais'],vestes:['Camisa','Calça','Bermuda','Vestido','Calçado','Rasgos','Impregnação hemática','Fragmentos têxteis'],lesoes:['Cabeça','Face','Região cervical','Tronco anterior','Tronco posterior','MSD','MSE','MID','MIE','Sangramento nasal','Otorragia','Fraturas aparentes','Fraturas expostas','Escoriações','Feridas abertas','Hematomas','Odor etílico percebido','Rigidez cadavérica','Hipóstases'],custodia:['Vestígio coletado','Vestígio descrito','Acondicionamento','Lacre','Encaminhamento','Exames complementares solicitados','PIC afixada','BIC preenchido']};
 
-function setField(k,v){const e=document.querySelector(`[data-k="${k}"]`);if(e)e.value=v||''}
+function setField(k,v){
+  const els=document.querySelectorAll(`[data-k="${k}"]`);
+  els.forEach(e=>e.value=v||'');
+}
 function delegaciaLabel(d){return `${d.circ} Circunscrição - ${d.cidade} (AIS ${d.ais})`}
-
+function normalizeText(s){return String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function setupDelegacias(){
+  const select=document.querySelector('select[data-k="delegaciaBusca"]');
+  if(select){
+    select.innerHTML='<option value="">Selecione a delegacia/circunscrição</option>'+
+      DELEGACIAS.map(d=>`<option value="${delegaciaLabel(d)}">${delegaciaLabel(d)}</option>`).join('');
+  }
+  renderDelegacias('');
+  toggleDelegaciaPanel();
+}
 function toggleDelegaciaPanel(){
   const box=document.getElementById('delegaciaCivilBox');
   const tipo=val('tipoAutoridade');
   if(!box) return;
-  box.style.display = tipo==='Polícia Civil' ? 'block' : 'none';
-  if(tipo!=='Polícia Civil'){
+  box.style.display = tipo === 'Polícia Civil' ? 'block' : 'none';
+  if(tipo !== 'Polícia Civil'){
     ['delegaciaBusca','delegaciaAIS','delegaciaCirc','delegaciaCidade'].forEach(k=>setField(k,''));
   }
 }
-
-function setupDelegacias(){
-  const dl=document.getElementById('delegaciasList');
-  if(dl) dl.innerHTML=DELEGACIAS.map(d=>`<option value="${delegaciaLabel(d)}"></option>`).join('');
-  document.querySelectorAll('select[data-k="delegaciaBusca"]').forEach(sel=>{
-    sel.innerHTML='<option value="">Selecione a delegacia/circunscrição</option>'+DELEGACIAS.map(d=>`<option value="${delegaciaLabel(d)}">${delegaciaLabel(d)}</option>`).join('');
-  });
-  renderDelegacias('');
-  toggleDelegaciaPanel();
-}
 function selectDelegacia(value){
-  const norm=s=>String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  let d=DELEGACIAS.find(x=>delegaciaLabel(x)===value) || DELEGACIAS.find(x=>norm(value).includes(norm(x.cidade)) && norm(value).includes(norm(x.circ)));
+  const n=normalizeText(value);
+  const d=DELEGACIAS.find(x=>delegaciaLabel(x)===value) ||
+          DELEGACIAS.find(x=>n.includes(normalizeText(x.cidade)) && n.includes(normalizeText(x.circ)));
   if(!d) return;
+  setField('delegaciaBusca',delegaciaLabel(d));
   setField('delegaciaAIS',d.ais);
   setField('delegaciaCirc',d.circ);
   setField('delegaciaCidade',d.cidade);
   if(!val('municipio')) setField('municipio',d.cidade);
+  generateAll();
   save();
 }
 function renderDelegacias(q){
   const tb=document.querySelector('#delegaciasTable tbody');
   if(!tb) return;
-  const norm=s=>String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  const n=norm(q);
-  tb.innerHTML=DELEGACIAS.filter(d=>!n || norm(`${d.ais} ${d.circ} ${d.cidade}`).includes(n)).map((d,i)=>
-    `<tr><td>${d.ais}</td><td>${d.circ}</td><td>${d.cidade}</td><td class="noprint"><button class="btn" onclick="setField('tipoAutoridade','Polícia Civil');toggleDelegaciaPanel();selectDelegacia('${delegaciaLabel(d).replaceAll("'","\\'")}');setField('delegaciaBusca','${delegaciaLabel(d).replaceAll("'","\\'")}')">Usar</button></td></tr>`
-  ).join('');
+  const n=normalizeText(q);
+  const rows=DELEGACIAS.filter(d=>!n || normalizeText(`${d.ais} ${d.circ} ${d.cidade}`).includes(n));
+  tb.innerHTML=rows.map(d=>{
+    const label=delegaciaLabel(d).replaceAll("'","\\'");
+    return `<tr><td>${d.ais}</td><td>${d.circ}</td><td>${d.cidade}</td><td class="noprint"><button class="btn" type="button" onclick="setField('tipoAutoridade','Polícia Civil');toggleDelegaciaPanel();selectDelegacia('${label}')">Usar</button></td></tr>`;
+  }).join('');
 }
 
 function initChecks(){for(const g in groups){const box=document.querySelector(`[data-group="${g}"]`);if(!box)continue;box.innerHTML=groups[g].map(v=>`<label class="check"><input type="checkbox" data-g="${g}" value="${v}"><span>${v}</span></label>`).join('')}}
 function data(){const o={fields:{},checks:{},tables:{}};document.querySelectorAll('[data-k]').forEach(e=>o.fields[e.dataset.k]=e.value);document.querySelectorAll('[data-g]').forEach(e=>{(o.checks[e.dataset.g]??=[]);if(e.checked)o.checks[e.dataset.g].push(e.value)});['objects','measures','photos'].forEach(id=>{o.tables[id]=[...document.querySelectorAll(`#${id} tbody tr`)].map(tr=>[...tr.querySelectorAll('input,select,textarea')].map(i=>i.value))});o.generated={summary:document.getElementById('summaryOut').innerText,draft:document.getElementById('draftOut').innerText};return o}
 function save(){localStorage.setItem(STORE,JSON.stringify(data()));document.getElementById('saveStatus').textContent='Salvo automaticamente: '+new Date().toLocaleTimeString()}
-function load(){const raw=localStorage.getItem(STORE);if(!raw)return;try{const o=JSON.parse(raw);Object.entries(o.fields||{}).forEach(([k,v])=>{let e=document.querySelector(`[data-k="${k}"]`);if(e)e.value=v});Object.entries(o.checks||{}).forEach(([g,arr])=>document.querySelectorAll(`[data-g="${g}"]`).forEach(e=>e.checked=arr.includes(e.value)));['objects','measures','photos'].forEach(id=>(o.tables?.[id]||[]).forEach(r=>addRow(id,r)));if(o.generated){summaryOut.innerText=o.generated.summary||'';draftOut.innerText=o.generated.draft||''}}catch(e){}}
+function load(){const raw=localStorage.getItem(STORE);if(!raw)return;try{const o=JSON.parse(raw);Object.entries(o.fields||{}).forEach(([k,v])=>{let e=document.querySelector(`[data-k="${k}"]`);if(e)e.value=v});Object.entries(o.checks||{}).forEach(([g,arr])=>document.querySelectorAll(`[data-g="${g}"]`).forEach(e=>e.checked=arr.includes(e.value)));['objects','measures','photos'].forEach(id=>(o.tables?.[id]||[]).forEach(r=>addRow(id,r)));if(o.generated){summaryOut.innerText=o.generated.summary||'';draftOut.innerText=o.generated.draft||''}toggleDelegaciaPanel();}catch(e){}}
 function addRow(id,vals=[]){const tr=document.createElement('tr');let cells={objects:['selectObj','text','text','text','text'],measures:['text','text','text','text'],photos:['text','selectPhoto','text','text']}[id];tr.innerHTML=cells.map((t,i)=>`<td>${inputByType(t,vals[i]||'')}</td>`).join('')+`<td class="noprint"><button class="rowbtn" onclick="this.closest('tr').remove();save()">X</button></td>`;document.querySelector(`#${id} tbody`).appendChild(tr);tr.querySelectorAll('input,select,textarea').forEach(e=>e.addEventListener('input',save));save()}
 function inputByType(t,v){if(t==='selectObj')return `<select><option>${v}</option><option>Sandália</option><option>Boné</option><option>Celular</option><option>Carteira</option><option>Mochila</option><option>Documento</option><option>Outro</option></select>`;if(t==='selectPhoto')return `<select><option>${v}</option><option>Local</option><option>Veículo</option><option>Vítima</option><option>Vestígio</option><option>Documento</option><option>Croqui</option></select>`;return `<input value="${String(v).replaceAll('&','&amp;').replaceAll('"','&quot;')}">`}
 function val(k){return document.querySelector(`[data-k="${k}"]`)?.value?.trim()||''}function chk(g){return [...document.querySelectorAll(`[data-g="${g}"]:checked`)].map(e=>e.value)}function line(s){return s? s+'\n':''}function sentence(parts){return parts.filter(Boolean).join(', ')}
@@ -155,7 +162,7 @@ function autoFill(t){const map=[['rep',/REP\s*(?:N[ºo]|n[ºo])?\s*[:\-]?\s*([\d
   const norm=s=>String(s||'').toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   const nt=norm(t);
   const d=DELEGACIAS.find(x=>nt.includes(norm(x.cidade)));
-  if(d && !val('delegaciaCidade')){setField('delegaciaBusca',delegaciaLabel(d));selectDelegacia(delegaciaLabel(d))}
+  if(d && !val('delegaciaCidade')){setField('tipoAutoridade','Polícia Civil');toggleDelegaciaPanel();selectDelegacia(delegaciaLabel(d))}
   save()}
 function drawSketch(){const c=document.getElementById('sketch'),x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);x.font='18px Arial';x.lineWidth=3;x.strokeStyle='#111';x.fillStyle='#111';x.fillText('Croqui esquemático sem escala',30,30);x.strokeRect(30,75,930,120);x.setLineDash([20,15]);x.beginPath();x.moveTo(30,135);x.lineTo(960,135);x.stroke();x.setLineDash([]);x.fillText('Faixas de rolamento / acostamento',40,205);x.strokeRect(30,215,930,80);x.fillText('Área adjacente / margem da via',40,330);let base=160;symbol(x,180,base,'Corpo');symbol(x,430,base,'Objeto');symbol(x,760,base,'Veículo');let rows=[...document.querySelectorAll('#measures tbody tr')].map(tr=>[...tr.querySelectorAll('input')].map(i=>i.value));x.font='14px Arial';rows.slice(0,5).forEach((r,i)=>x.fillText(`${r[0]||'A'} ↔ ${r[1]||'B'}: ${r[2]||''}`,40,245+i*22))}
 function symbol(x,px,py,label){x.beginPath();x.arc(px,py,18,0,7);x.stroke();x.fillText(label,px-25,py+45)}
