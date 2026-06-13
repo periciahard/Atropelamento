@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Atropelamento FCM - Campo</title>
+<title>Atropelamento FCM - Campo V16</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
 <meta name="theme-color" content="#0b1220">
@@ -19,24 +19,78 @@ main{max-width:780px;margin:auto;padding:10px 10px 80px}.tabs{position:fixed;bot
 .report{background:#fff;color:#000;padding:18px;border-radius:10px;border:1px solid #ddd}.report h1{text-align:center;font-size:16px;margin:4px 0}.report h2{font-size:15px;border:0;margin:18px 0 8px;padding:0}.report p{text-align:justify;line-height:1.55}.report img{max-width:100%;max-height:420px;object-fit:contain;display:block;margin:8px auto;border:1px solid #ddd}
 .quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}.quick .btn{min-height:54px}
 @media print{.top,.tabs,.noprint,.toolbar{display:none!important}body{background:#fff}main{padding:0;max-width:none}.section{display:none!important}#laudo{display:block!important}.card{box-shadow:none;border:0;margin:0}.report{border:0;padding:0}.report p{font-size:12pt}.report h1{font-size:13pt}.report h2{font-size:12pt}.pagebreak{page-break-before:always}}
+
+.panelGrid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:720px){.panelGrid{grid-template-columns:1fr 1fr}}
+.metric{background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px}
+.metric b{display:block;font-size:13px;color:#334155}.metric span{font-size:18px;font-weight:800;color:#0f172a}
+.extractBox{background:#f8fafc;border:1px dashed #94a3b8;border-radius:12px;padding:10px}
+.extractStatus{font-size:12px;color:#475569;margin-top:6px}
+.badge{display:inline-block;background:#e0f2fe;color:#075985;border-radius:999px;padding:3px 8px;font-size:12px;font-weight:700;margin:2px}
+
 </style>
+
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
 </head>
 <body>
-<header class="top"><div class="logo">FCM</div><div class="title"><b>ATROPELAMENTO - CAMPO</b><span>simples • offline • celular</span></div><div class="status">● salvo</div></header>
+<header class="top"><div class="logo">FCM</div><div class="title"><b>ATROPELAMENTO - CAMPO</b><span>V16 • celular • PDF/imagem • anexos</span></div><div class="status">● salvo</div></header>
 <main>
 <section id="inicio" class="section active">
  <div class="card">
   <h2>Uso rápido no local</h2>
   <div class="quick noprint">
-   <button class="btn" onclick="show('acionamento')">Acionamento</button>
-   <button class="btn" onclick="show('local')">Local/GPS</button>
+   <button class="btn" onclick="show('extrair')">Extrair PDF/imagem</button><button class="btn" onclick="show('acionamento')">Acionamento</button>
+   <button class="btn" onclick="show('preservacao')">Preservação</button><button class="btn" onclick="show('local')">Local/GPS</button>
    <button class="btn" onclick="show('veiculo')">Veículo</button>
    <button class="btn" onclick="show('vitima')">Vítima</button>
    <button class="btn" onclick="show('vestigios')">Vestígios</button>
    <button class="btn green" onclick="show('anexos')">Anexos</button>
   </div>
   <p class="small">Sem croqui interno e sem mapa anatômico interno. Anexe foto/imagem/PDF visual pronto quando necessário.</p>
-  <div id="summary" class="out"></div>
+  <div class="panelGrid">
+ <div class="metric"><b>REP</b><span id="mRep">—</span></div>
+ <div class="metric"><b>Município</b><span id="mMun">—</span></div>
+ <div class="metric"><b>Veículo</b><span id="mVeic">—</span></div>
+ <div class="metric"><b>Anexos</b><span id="mAnexos">0</span></div>
+</div>
+<div id="summary" class="out"></div>
+ </div>
+</section>
+
+
+<section id="extrair" class="section">
+ <div class="card">
+  <h2>Extração de dados de PDF ou imagem</h2>
+  <p class="small">Use para tentar preencher automaticamente campos do acionamento, local, veículo, vítima e condutor. A extração por imagem depende de OCR e pode ser mais lenta.</p>
+  <div class="panelGrid">
+   <div class="extractBox">
+    <h3>PDF</h3>
+    <p class="small">Ex.: BO, chamado, REP anterior, relatório preliminar.</p>
+    <div class="toolbar noprint">
+     <button class="btn" onclick="pdfInput.click()">Selecionar PDF</button>
+    </div>
+    <input id="pdfInput" type="file" accept="application/pdf" hidden onchange="extractPDF(this.files[0])">
+    <div id="pdfStatus" class="extractStatus">Nenhum PDF selecionado.</div>
+   </div>
+   <div class="extractBox">
+    <h3>Imagem</h3>
+    <p class="small">Ex.: print de ocorrência, foto de documento, tela do chamado.</p>
+    <div class="toolbar noprint">
+     <button class="btn green" onclick="ocrInput.click()">Selecionar imagem</button>
+    </div>
+    <input id="ocrInput" type="file" accept="image/*" hidden onchange="extractImage(this.files[0])">
+    <div id="ocrStatus" class="extractStatus">Nenhuma imagem selecionada.</div>
+   </div>
+  </div>
+  <h3>Texto extraído / colado</h3>
+  <textarea id="rawText" placeholder="Cole aqui o texto de um PDF, print ou ocorrência. Depois toque em Interpretar texto."></textarea>
+  <div class="toolbar noprint">
+   <button class="btn" onclick="parseRawText()">Interpretar texto</button>
+   <button class="btn gray" onclick="clearRawText()">Limpar texto</button>
+  </div>
+  <div id="parseResult" class="extractStatus"></div>
  </div>
 </section>
 
@@ -49,6 +103,17 @@ main{max-width:780px;margin:auto;padding:10px 10px 80px}.tabs{position:fixed;bot
  <div><label>AIS</label><input data-k="ais" readonly></div><div><label>Circunscrição</label><input data-k="circ" readonly></div><div><label>Cidade da delegacia</label><input data-k="cidadeDel" readonly></div>
  <div><label>Delegado</label><input data-k="delegado"></div><div><label>Matrícula</label><input data-k="matDelegado"></div>
  </div></div></section>
+
+
+<section id="preservacao" class="section"><div class="card"><h2>2. Isolamento e preservação</h2><div class="grid two">
+ <div><label>Local isolado?</label><select data-k="isoLocal"><option></option><option>Sim</option><option>Não</option><option>Parcialmente</option></select></div>
+ <div><label>Responsável pelo isolamento</label><input data-k="isoResp"></div>
+ <div><label>Matrícula / unidade</label><input data-k="isoMat"></div>
+ <div><label>Corpo coberto antes da perícia?</label><select data-k="corpoCoberto"><option></option><option>Sim</option><option>Não</option><option>Não informado</option></select></div>
+ <div><label>Veículo movimentado?</label><select data-k="veiculoMovido"><option></option><option>Sim</option><option>Não</option><option>Não informado</option></select></div>
+ <div><label>Presença de curiosos/interferência</label><select data-k="interferencia"><option></option><option>Não observada</option><option>Observada</option><option>Não informado</option></select></div>
+ <div style="grid-column:1/-1"><label>Observações sobre preservação</label><textarea data-k="isoObs"></textarea></div>
+</div></div></section>
 
 <section id="local" class="section"><div class="card"><h2>2. Local e condições</h2><div class="toolbar noprint"><button class="btn" onclick="gps()">Obter GPS</button></div><div class="grid two">
  <div><label>Município</label><input data-k="municipio"></div><div><label>Rodovia/Via</label><input data-k="via"></div><div><label>Km / referência</label><input data-k="km"></div><div><label>Sentido da via</label><input data-k="sentidoVia"></div>
@@ -91,10 +156,10 @@ main{max-width:780px;margin:auto;padding:10px 10px 80px}.tabs{position:fixed;bot
 <section id="laudo" class="section"><div class="card"><h2>8. Laudo completo</h2><div class="toolbar noprint"><button class="btn" onclick="buildReport()">Atualizar</button><button class="btn green" onclick="printReport()">Exportar PDF</button><button class="btn gray" onclick="copyReport()">Copiar texto</button><button class="btn red" onclick="clearAll()">Apagar tudo</button></div><div id="report" class="report"></div></div></section>
 </main>
 <nav class="tabs noprint">
- <button class="tab active" onclick="show('inicio',this)">Início</button><button class="tab" onclick="show('acionamento',this)">Acion.</button><button class="tab" onclick="show('local',this)">Local</button><button class="tab" onclick="show('condutor',this)">Condutor</button><button class="tab" onclick="show('veiculo',this)">Veículo</button><button class="tab" onclick="show('vitima',this)">Vítima</button><button class="tab" onclick="show('vestigios',this)">Vestígios</button><button class="tab" onclick="show('anexos',this)">Anexos</button><button class="tab" onclick="show('laudo',this)">Laudo</button>
+ <button class="tab active" onclick="show('inicio',this)">Início</button><button class="tab" onclick="show('extrair',this)">Extrair</button><button class="tab" onclick="show('acionamento',this)">Acion.</button><button class="tab" onclick="show('preservacao',this)">Preserv.</button><button class="tab" onclick="show('local',this)">Local</button><button class="tab" onclick="show('condutor',this)">Condutor</button><button class="tab" onclick="show('veiculo',this)">Veículo</button><button class="tab" onclick="show('vitima',this)">Vítima</button><button class="tab" onclick="show('vestigios',this)">Vestígios</button><button class="tab" onclick="show('anexos',this)">Anexos</button><button class="tab" onclick="show('laudo',this)">Laudo</button>
 </nav>
 <script>
-const STORE='atropelamento_v15_campo_simples'; const DELEGACIAS=[{"ais": "14", "circ": "96ª", "cidade": "AGRESTINA"}, {"ais": "14", "circ": "95ª", "cidade": "ALTINHO"}, {"ais": "14", "circ": "102ª", "cidade": "BARRA DE GUABIRABA"}, {"ais": "14", "circ": "91ª", "cidade": "BEZERROS"}, {"ais": "14", "circ": "92ª", "cidade": "BONITO"}, {"ais": "14", "circ": "100ª", "cidade": "CAMOCIM DE SÃO FÉLIX"}, {"ais": "14", "circ": "88ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "89ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "90ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "4ª DEAM", "cidade": "CARUARU"}, {"ais": "14", "circ": "7ª DPRN", "cidade": "CARUARU"}, {"ais": "14", "circ": "3ª DIVISÃO DE HOMICÍDIOS", "cidade": "CARUARU"}, {"ais": "14", "circ": "94ª", "cidade": "CUPIRA"}, {"ais": "14", "circ": "99ª", "cidade": "LAGOA DOS GATOS"}, {"ais": "14", "circ": "98ª", "cidade": "RIACHO DAS ALMAS"}, {"ais": "14", "circ": "101ª", "cidade": "SAIRÉ"}, {"ais": "14", "circ": "97ª", "cidade": "SÃO JOAQUIM DO MONTE"}, {"ais": "15", "circ": "104ª", "cidade": "BELO JARDIM"}, {"ais": "15", "circ": "106ª", "cidade": "SÃO BENTO DO UNA"}, {"ais": "15", "circ": "108ª", "cidade": "SÃO CAETANO"}, {"ais": "15", "circ": "109ª", "cidade": "CACHOEIRINHA"}, {"ais": "15", "circ": "110ª", "cidade": "SANHARÓ"}, {"ais": "15", "circ": "112ª", "cidade": "TACAIMBÓ"}, {"ais": "17", "circ": "107ª", "cidade": "BREJO DA MADRE DE DEUS"}, {"ais": "17", "circ": "111ª", "cidade": "JATAÚBA"}, {"ais": "17", "circ": "128ª", "cidade": "SANTA CRUZ DO CAPIBARIBE"}, {"ais": "17", "circ": "130ª", "cidade": "TAQUARITINGA DO NORTE"}, {"ais": "17", "circ": "129ª", "cidade": "TORITAMA"}, {"ais": "17", "circ": "131ª", "cidade": "VERTENTES"}];
+const STORE='atropelamento_v16_extracao'; const DELEGACIAS=[{"ais": "14", "circ": "96ª", "cidade": "AGRESTINA"}, {"ais": "14", "circ": "95ª", "cidade": "ALTINHO"}, {"ais": "14", "circ": "102ª", "cidade": "BARRA DE GUABIRABA"}, {"ais": "14", "circ": "91ª", "cidade": "BEZERROS"}, {"ais": "14", "circ": "92ª", "cidade": "BONITO"}, {"ais": "14", "circ": "100ª", "cidade": "CAMOCIM DE SÃO FÉLIX"}, {"ais": "14", "circ": "88ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "89ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "90ª", "cidade": "CARUARU"}, {"ais": "14", "circ": "4ª DEAM", "cidade": "CARUARU"}, {"ais": "14", "circ": "7ª DPRN", "cidade": "CARUARU"}, {"ais": "14", "circ": "3ª DIVISÃO DE HOMICÍDIOS", "cidade": "CARUARU"}, {"ais": "14", "circ": "94ª", "cidade": "CUPIRA"}, {"ais": "14", "circ": "99ª", "cidade": "LAGOA DOS GATOS"}, {"ais": "14", "circ": "98ª", "cidade": "RIACHO DAS ALMAS"}, {"ais": "14", "circ": "101ª", "cidade": "SAIRÉ"}, {"ais": "14", "circ": "97ª", "cidade": "SÃO JOAQUIM DO MONTE"}, {"ais": "15", "circ": "104ª", "cidade": "BELO JARDIM"}, {"ais": "15", "circ": "106ª", "cidade": "SÃO BENTO DO UNA"}, {"ais": "15", "circ": "108ª", "cidade": "SÃO CAETANO"}, {"ais": "15", "circ": "109ª", "cidade": "CACHOEIRINHA"}, {"ais": "15", "circ": "110ª", "cidade": "SANHARÓ"}, {"ais": "15", "circ": "112ª", "cidade": "TACAIMBÓ"}, {"ais": "17", "circ": "107ª", "cidade": "BREJO DA MADRE DE DEUS"}, {"ais": "17", "circ": "111ª", "cidade": "JATAÚBA"}, {"ais": "17", "circ": "128ª", "cidade": "SANTA CRUZ DO CAPIBARIBE"}, {"ais": "17", "circ": "130ª", "cidade": "TAQUARITINGA DO NORTE"}, {"ais": "17", "circ": "129ª", "cidade": "TORITAMA"}, {"ais": "17", "circ": "131ª", "cidade": "VERTENTES"}];
 let items=[],photos=[],currentType='Foto';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)], val=k=>($(`[data-k="${k}"]`)||{value:''}).value, set=(k,v)=>$$(`[data-k="${k}"]`).forEach(e=>e.value=v||'');
 function show(id,btn){$$('.section').forEach(s=>s.classList.remove('active'));$('#'+id).classList.add('active');$$('.tab').forEach(t=>t.classList.remove('active'));if(btn)btn.classList.add('active');scrollTo(0,0)}
@@ -105,7 +170,89 @@ function addItem(){items.push({tipo:'Sandália',desc:'',dist:''});renderItems();
 function addSpecial(type){currentType=type;$('#fileInput').click()}function fileData(f){return new Promise(res=>{let r=new FileReader();r.onload=()=>{let img=new Image();img.onload=()=>{let c=document.createElement('canvas'),w=Math.min(1400,img.width),s=w/img.width;c.width=w;c.height=img.height*s;c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.78))};img.src=r.result};r.readAsDataURL(f)})}async function receiveFiles(fs){for(let f of fs)if(f.type.startsWith('image/'))photos.push({src:await fileData(f),cap:'',cat:currentType});renderPhotos();save();$('#fileInput').value=''}
 function renderPhotos(){$('#photoGrid').innerHTML=photos.map((p,i)=>`<div class="photo"><img src="${p.src}"><select onchange="photos[${i}].cat=this.value;save()"><option ${p.cat==='Foto'?'selected':''}>Foto</option><option ${p.cat==='Croqui'?'selected':''}>Croqui</option><option ${p.cat==='Mapa anatômico'?'selected':''}>Mapa anatômico</option><option ${p.cat==='Documento'?'selected':''}>Documento</option></select><input value="${p.cap}" placeholder="Legenda ${i+1}" oninput="photos[${i}].cap=this.value;save()"><button class="btn red noprint" onclick="photos.splice(${i},1);renderPhotos();save()">Remover</button></div>`).join('')}function clearPhotos(){if(confirm('Apagar todos os anexos?')){photos=[];renderPhotos();save()}}
 function textOr(v,a){return v&&v.trim()?v:a}function genSummary(){let ch=checks().join(', '),lines=[];lines.push(`REP: ${textOr(val('rep'),'não informado')} | Local: ${textOr(val('via'),'via não informada')} | Município: ${textOr(val('municipio'),'não informado')}`);if(val('vitNome'))lines.push(`Vítima: ${val('vitNome')}`);if(val('vModelo')||val('vPlaca'))lines.push(`Veículo: ${val('vModelo')} ${val('vPlaca')}`);if(ch)lines.push(`Checklist: ${ch}`);lines.push(`Anexos: ${photos.length}`);$('#summary').innerText=lines.join('\\n');buildReport(false)}
-function p(t){return `<p>${t}</p>`}function sec(n,t){return `<h2>${n}. ${t}</h2>`}function buildReport(update=True){let ch=checks().join(', '),html=`<h1>PERÍCIA EM LOCAL DE SINISTRO DE TRÂNSITO COM VÍTIMA FATAL</h1><h1>REP Nº ${textOr(val('rep'),'____')}</h1>`;html+=p(`REP nº ${textOr(val('rep'),'____')} – Concernente ao sinistro de trânsito com vítima fatal envolvendo o veículo ${textOr(val('vModelo'),'____')}, placa ${textOr(val('vPlaca'),'____')}, e a vítima ${textOr(val('vitNome'),'____')}, no município de ${textOr(val('municipio'),'____')}. SEI nº ${textOr(val('sei'),'____')}.`);html+=sec(1,'HISTÓRICO')+p(`Às ${textOr(val('horaAcionamento'),'____')} do dia ${textOr(val('data'),'____')}, houve solicitação para realização de exame pericial em local de sinistro de trânsito com vítima fatal, vinculada ao REP nº ${textOr(val('rep'),'____')}. A equipe pericial coordenada pelo Perito Criminal ${textOr(val('perito'),'FELIPE CAMARGO MARCOLINO')} chegou às ${textOr(val('horaChegada'),'____')}, iniciou os exames às ${textOr(val('horaInicio'),'____')} e encerrou-os às ${textOr(val('horaTermino'),'____')}.`);if(val('delegacia'))html+=p(`A ocorrência ficou vinculada à ${val('delegacia')}.`);html+=sec(2,'OBJETIVO')+p('O presente exame técnico-pericial teve por finalidade identificar, registrar, analisar e interpretar os vestígios materiais relacionados ao sinistro de trânsito em apuração.');html+=sec(3,'ISOLAMENTO E PRESERVAÇÃO DO LOCAL')+p('O isolamento e a preservação do local devem ser avaliados conforme os registros efetuados durante os exames periciais, considerando eventuais limitações observadas.');html+=sec(4,'DESCRIÇÃO DO LOCAL')+p(`A ocorrência verificou-se em ${textOr(val('via'),'via não informada')}, ${textOr(val('km'),'sem referência quilométrica informada')}, município de ${textOr(val('municipio'),'não informado')}, tendo como referência ${textOr(val('referencia'),'não informada')}. Coordenadas: latitude ${textOr(val('lat'),'não informada')} e longitude ${textOr(val('lon'),'não informada')}.`)+p(`Quanto à geometria e às condições locais, registrou-se: ${ch||'sem seleção específica'}.`);html+=sec(5,'EXAMES')+`<h2>5.1 Locais imediato e mediato</h2>`+p(`Vestígios e objetos associados: ${items.length?items.map(i=>`${i.tipo} ${i.desc} ${i.dist}`.trim()).join('; '):'não informados'}.`);html+=`<h2>5.2 Condutor de V1</h2>`+p(`Condutor: ${textOr(val('condNome'),'não informado')}, CNH ${textOr(val('condCnh'),'não informada')}, categoria ${textOr(val('condCat'),'não informada')}. Declarações: ${textOr(val('condDecl'),'não informadas')}.`);html+=`<h2>5.3 Veículo V1</h2>`+p(`Veículo: ${textOr(val('vModelo'),'não informado')}, placa ${textOr(val('vPlaca'),'não informada')}. Danos: ${textOr(val('vDanos'),'não informados')}. Material aderido: ${textOr(val('vAderido'),'não informado')}.`);html+=`<h2>5.4 Vítima</h2>`+p(`Vítima: ${textOr(val('vitNome'),'não informada')}, posição final ${textOr(val('vitPos'),'não informada')}, orientação ${textOr(val('vitOrient'),'não informada')}. Vestes: ${textOr(val('vitVestes'),'não informadas')}. Perinecroscopia/lesões predominantes: ${textOr(val('vitLesoes'),'não informadas')}.`);html+=sec(6,'CADEIA DE CUSTÓDIA')+p('Vestígios eventualmente coletados deverão ser descritos em termo próprio, com acondicionamento, lacre, encaminhamento e destino.');html+=sec(7,'DISCUSSÃO')+p('A análise técnico-pericial permanece limitada aos vestígios materiais efetivamente observados, registrados e documentados.');html+=sec(8,'CONCLUSÃO')+p('Com base nos vestígios documentados, nas posições finais registradas e nas informações coletadas, a dinâmica do evento deverá ser interpretada sem extrapolação além do suporte vestigial.');if(photos.length){html+=`<h2>ANEXOS FOTOGRÁFICOS E GRÁFICOS</h2>`+photos.map((ph,i)=>`<p>${ph.cat} ${i+1}: ${ph.cap||'registro anexo'}.</p><img src="${ph.src}">`).join('')}$('#report').innerHTML=html;if(update)save()}function printReport(){buildReport(false);show('laudo');setTimeout(()=>window.print(),200)}function copyReport(){navigator.clipboard.writeText($('#report').innerText);alert('Texto copiado.')}
+function p(t){return `<p>${t}</p>`}function sec(n,t){return `<h2>${n}. ${t}</h2>`}function buildReport(update=True){let ch=checks().join(', '),html=`<h1>PERÍCIA EM LOCAL DE SINISTRO DE TRÂNSITO COM VÍTIMA FATAL</h1><h1>REP Nº ${textOr(val('rep'),'____')}</h1>`;html+=p(`REP nº ${textOr(val('rep'),'____')} – Concernente ao sinistro de trânsito com vítima fatal envolvendo o veículo ${textOr(val('vModelo'),'____')}, placa ${textOr(val('vPlaca'),'____')}, e a vítima ${textOr(val('vitNome'),'____')}, no município de ${textOr(val('municipio'),'____')}. SEI nº ${textOr(val('sei'),'____')}.`);html+=sec(1,'HISTÓRICO')+p(`Às ${textOr(val('horaAcionamento'),'____')} do dia ${textOr(val('data'),'____')}, houve solicitação para realização de exame pericial em local de sinistro de trânsito com vítima fatal, vinculada ao REP nº ${textOr(val('rep'),'____')}. A equipe pericial coordenada pelo Perito Criminal ${textOr(val('perito'),'FELIPE CAMARGO MARCOLINO')} chegou às ${textOr(val('horaChegada'),'____')}, iniciou os exames às ${textOr(val('horaInicio'),'____')} e encerrou-os às ${textOr(val('horaTermino'),'____')}.`);if(val('delegacia'))html+=p(`A ocorrência ficou vinculada à ${val('delegacia')}.`);html+=sec(2,'OBJETIVO')+p('O presente exame técnico-pericial teve por finalidade identificar, registrar, analisar e interpretar os vestígios materiais relacionados ao sinistro de trânsito em apuração.');html+=sec(3,'ISOLAMENTO E PRESERVAÇÃO DO LOCAL')+p(`O local foi registrado como ${textOr(val('isoLocal'),'não informado')} quanto ao isolamento. Responsável informado: ${textOr(val('isoResp'),'não informado')}. Corpo coberto antes da perícia: ${textOr(val('corpoCoberto'),'não informado')}. Veículo movimentado: ${textOr(val('veiculoMovido'),'não informado')}. Interferência de terceiros/curiosos: ${textOr(val('interferencia'),'não informado')}. Observações: ${textOr(val('isoObs'),'sem observações adicionais')}.`);html+=sec(4,'DESCRIÇÃO DO LOCAL')+p(`A ocorrência verificou-se em ${textOr(val('via'),'via não informada')}, ${textOr(val('km'),'sem referência quilométrica informada')}, município de ${textOr(val('municipio'),'não informado')}, tendo como referência ${textOr(val('referencia'),'não informada')}. Coordenadas: latitude ${textOr(val('lat'),'não informada')} e longitude ${textOr(val('lon'),'não informada')}.`)+p(`Quanto à geometria e às condições locais, registrou-se: ${ch||'sem seleção específica'}.`);html+=sec(5,'EXAMES')+`<h2>5.1 Locais imediato e mediato</h2>`+p(`Vestígios e objetos associados: ${items.length?items.map(i=>`${i.tipo} ${i.desc} ${i.dist}`.trim()).join('; '):'não informados'}.`);html+=`<h2>5.2 Condutor de V1</h2>`+p(`Condutor: ${textOr(val('condNome'),'não informado')}, CNH ${textOr(val('condCnh'),'não informada')}, categoria ${textOr(val('condCat'),'não informada')}. Declarações: ${textOr(val('condDecl'),'não informadas')}.`);html+=`<h2>5.3 Veículo V1</h2>`+p(`Veículo: ${textOr(val('vModelo'),'não informado')}, placa ${textOr(val('vPlaca'),'não informada')}. Danos: ${textOr(val('vDanos'),'não informados')}. Material aderido: ${textOr(val('vAderido'),'não informado')}.`);html+=`<h2>5.4 Vítima</h2>`+p(`Vítima: ${textOr(val('vitNome'),'não informada')}, posição final ${textOr(val('vitPos'),'não informada')}, orientação ${textOr(val('vitOrient'),'não informada')}. Vestes: ${textOr(val('vitVestes'),'não informadas')}. Perinecroscopia/lesões predominantes: ${textOr(val('vitLesoes'),'não informadas')}.`);html+=sec(6,'CADEIA DE CUSTÓDIA')+p('Vestígios eventualmente coletados deverão ser descritos em termo próprio, com acondicionamento, lacre, encaminhamento e destino.');html+=sec(7,'DISCUSSÃO')+p('A análise técnico-pericial permanece limitada aos vestígios materiais efetivamente observados, registrados e documentados.');html+=sec(8,'CONCLUSÃO')+p('Com base nos vestígios documentados, nas posições finais registradas e nas informações coletadas, a dinâmica do evento deverá ser interpretada sem extrapolação além do suporte vestigial.');if(photos.length){html+=`<h2>ANEXOS FOTOGRÁFICOS E GRÁFICOS</h2>`+photos.map((ph,i)=>`<p>${ph.cat} ${i+1}: ${ph.cap||'registro anexo'}.</p><img src="${ph.src}">`).join('')}$('#report').innerHTML=html;if(update)save()}function printReport(){buildReport(false);show('laudo');setTimeout(()=>window.print(),200)}function copyReport(){navigator.clipboard.writeText($('#report').innerText);alert('Texto copiado.')}
+
+async function extractPDF(file){
+  if(!file)return;
+  const st=$('#pdfStatus'); st.textContent='Lendo PDF...';
+  try{
+    let pdfjs = window.pdfjsLib || await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs');
+    if(pdfjs.GlobalWorkerOptions) pdfjs.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+    const buf=await file.arrayBuffer();
+    const pdf=await pdfjs.getDocument({data:buf}).promise;
+    let text='';
+    for(let i=1;i<=pdf.numPages;i++){
+      const page=await pdf.getPage(i);
+      const content=await page.getTextContent();
+      text += content.items.map(it=>it.str).join(' ') + '\n';
+    }
+    $('#rawText').value=text.trim();
+    st.textContent=`PDF lido: ${pdf.numPages} página(s). Toque em Interpretar texto.`;
+    parseRawText();
+  }catch(e){
+    st.textContent='Não foi possível ler o PDF automaticamente. Cole o texto manualmente.';
+    console.error(e);
+  }
+}
+async function extractImage(file){
+  if(!file)return;
+  const st=$('#ocrStatus'); st.textContent='Fazendo OCR da imagem... pode demorar.';
+  try{
+    if(!window.Tesseract) throw new Error('OCR indisponível');
+    const result=await Tesseract.recognize(file,'por+eng',{logger:m=>{if(m.status)st.textContent=`OCR: ${m.status} ${m.progress?Math.round(m.progress*100)+'%':''}`}});
+    $('#rawText').value=result.data.text.trim();
+    st.textContent='OCR concluído. Toque em Interpretar texto.';
+    parseRawText();
+  }catch(e){
+    st.textContent='Não foi possível extrair texto da imagem automaticamente. Use a imagem como anexo ou cole o texto manualmente.';
+    console.error(e);
+  }
+}
+function clearRawText(){ $('#rawText').value=''; $('#parseResult').textContent=''; }
+function cleanText(t){return String(t||'').replace(/\s+/g,' ').trim()}
+function pick(t,patterns){
+  for(const p of patterns){const m=t.match(p); if(m&&m[1]) return cleanText(m[1]);}
+  return '';
+}
+function parseRawText(){
+  const t=$('#rawText').value||'';
+  if(!t.trim()){ $('#parseResult').textContent='Nenhum texto para interpretar.'; return; }
+  const found=[];
+  const map=[
+    ['rep', [/REP\s*(?:n[ºo.]*)?\s*[:\-]?\s*([0-9.\/-]{5,})/i, /Laudo Pericial nº\s*([0-9.\/-]+)/i]],
+    ['sei', [/SEI\s*(?:n[ºo.]*)?\s*[:\-]?\s*([0-9.\-\/]+)/i]],
+    ['ciods', [/(CIODS[0-9A-Z\-]+)/i, /protocolo\s*(CIODS[0-9A-Z\-]+)/i]],
+    ['municipio', [/munic[ií]pio de\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ ]+?)(?:\/PE|,|\.|\s)/i]],
+    ['via', [/(Rodovia\s+[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9\- ]+\([A-Z]{2,3}-?\d+\))/i, /(BR-?\s*\d+)/i, /(PE-?\s*\d+)/i]],
+    ['km', [/(?:km|quil[oô]metro)\s*([0-9,.]+)/i]],
+    ['vPlaca', [/placa\s*([A-Z]{3}[0-9][A-Z0-9][0-9]{2})/i]],
+    ['vModelo', [/ve[ií]culo\s+([A-Z0-9ÁÉÍÓÚÂÊÔÃÕÇ\/\- ]+?),\s*placa/i, /envolvendo o ve[ií]culo\s+([A-Z0-9ÁÉÍÓÚÂÊÔÃÕÇ\/\- ]+?),/i]],
+    ['vitNome', [/pedestre\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ ]{6,}),/i, /v[ií]tima\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ ]{6,}),/i]],
+    ['delegacia', [/circunscri[cç][aã]o da\s+([0-9ªºA-ZÁÉÍÓÚÂÊÔÃÕÇ ]+Circunscri[cç][aã]o de Pol[ií]cia)/i]],
+    ['horaAcionamento', [/Às\s*([0-9]{1,2}h[0-9]{2}min)/i, /([0-9]{1,2}:[0-9]{2})/i]],
+    ['condNome', [/condutor .*?como\s+([A-ZÁÉÍÓÚÂÊÔÃÕÇ ]{6,}),/i]],
+    ['condCnh', [/CNH\)?\s*(?:n[ºo.]*)?\s*([0-9]{6,})/i]],
+    ['condCat', [/categoria\s*([A-E]{1,2})/i]],
+  ];
+  for(const [k,patterns] of map){
+    const v=pick(t,patterns);
+    if(v){
+      if(k==='horaAcionamento'){
+        let vv=v.replace('h',':').replace('min','');
+        set(k,vv);
+      }else if(k==='delegacia'){
+        const opt=[...document.querySelectorAll('[data-k="delegacia"] option')].find(o=>o.textContent.toUpperCase().includes(v.toUpperCase().split(' ')[0]));
+        if(opt){set('tipoAutoridade','Polícia Civil');toggleDelegacia();set('delegacia',opt.textContent);selDelegacia(opt.textContent)}
+      }else{
+        set(k,v);
+      }
+      found.push(k);
+    }
+  }
+  $('#parseResult').innerHTML = found.length ? `Campos preenchidos: ${found.map(x=>'<span class="badge">'+x+'</span>').join(' ')}` : 'Nenhum campo identificado automaticamente. Você pode usar o texto como referência manual.';
+  save();
+}
+
 function renderAll(){renderItems();renderPhotos();genSummary();buildReport(false)}document.addEventListener('input',e=>{if(e.target.matches('[data-k],input[type=checkbox],textarea'))save()});initDelegacias();load();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body></html>
