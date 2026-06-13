@@ -1,6 +1,6 @@
 {
-  "name": "Atropelamento FCM V14 Vetorial",
-  "short_name": "Atrop FCM",
+  "name": "Atropelamento FCM Campo Simples",
+  "short_name": "Atrop Campo",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0b1220",
