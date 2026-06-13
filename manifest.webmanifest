@@ -1,10 +1,10 @@
 {
-  "name": "Atropelamento FCM V10 Mobile",
+  "name": "Atropelamento FCM V12 Visual",
   "short_name": "Atrop FCM",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#07111f",
-  "theme_color": "#07111f",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
   "icons": [
     {
       "src": "icon.svg",
