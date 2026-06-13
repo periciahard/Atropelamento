@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#111827"/><path d="M94 332h324" stroke="#fff" stroke-width="24" stroke-linecap="round"/><path d="M130 210h252" stroke="#fff" stroke-width="18" stroke-dasharray="38 28"/><circle cx="178" cy="332" r="38" fill="#fff"/><path d="M256 100l44 72 82 18-54 64 8 84-80-34-80 34 8-84-54-64 82-18z" fill="#fbbf24"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="80" ry="80" fill="#1f2937"/>
+<path d="M120 290 L160 210 Q175 180 210 180 H302 Q337 180 352 210 L392 290
+Q405 290 415 300 Q425 310 425 325 V360 H390 V390 H350 V360 H162 V390 H122 V360 H87 V325
+Q87 310 97 300 Q107 290 120 290 Z" fill="white"/>
+<circle cx="170" cy="325" r="32" fill="#1f2937"/>
+<circle cx="342" cy="325" r="32" fill="#1f2937"/>
+<text x="256" y="275" font-size="78" text-anchor="middle" font-family="Arial" font-weight="bold" fill="#1f2937">FCM</text>
+</svg>
