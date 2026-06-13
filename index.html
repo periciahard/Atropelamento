@@ -1,179 +1,67 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Atropelamento - Registro Pericial</title>
-  <meta name="theme-color" content="#1f4e79">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Atropelamento">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icon.svg">
-  <style>
-    :root{--bg:#f4f6f8;--card:#fff;--txt:#1f2937;--muted:#6b7280;--line:#d8dee6;--pri:#1f4e79;--pri2:#173b5c;--ok:#166534;--bad:#991b1b}
-    *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);font-size:14px}.wrap{max-width:1100px;margin:auto;padding:16px}header{background:var(--pri);color:white;padding:16px;border-radius:10px;margin-bottom:14px}h1{font-size:22px;margin:0 0 6px}.sub{opacity:.9}section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px;margin:12px 0;break-inside:avoid}h2{font-size:17px;margin:0 0 12px;color:var(--pri)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px 14px}.field{display:flex;flex-direction:column;gap:4px}label{font-weight:700}.hint{font-size:12px;color:var(--muted);line-height:1.25}input,select,textarea{width:100%;padding:9px;border:1px solid #bcc6d2;border-radius:7px;font:inherit;background:white}textarea{min-height:72px;resize:vertical}.buttons{position:sticky;bottom:0;background:rgba(244,246,248,.95);display:flex;flex-wrap:wrap;gap:8px;padding:10px 0;border-top:1px solid var(--line)}button,.filebtn{border:0;border-radius:7px;padding:10px 12px;background:var(--pri);color:white;font-weight:700;cursor:pointer}button:hover,.filebtn:hover{background:var(--pri2)}button.secondary{background:#374151}button.danger{background:var(--bad)}button.ok{background:var(--ok)}.status{font-size:12px;color:var(--muted);margin-top:6px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hidden{display:none}.footer-note{font-size:12px;color:var(--muted);margin:10px 0}.print-title{display:none}@media(max-width:700px){.two{grid-template-columns:1fr}.wrap{padding:10px}}@media print{body{background:white}.wrap{max-width:none;padding:0}header,.buttons,.no-print{display:none}.print-title{display:block;text-align:center;margin-bottom:12px}section{border:1px solid #999;margin:8px 0;padding:10px}input,select,textarea{border:0;border-bottom:1px solid #aaa;border-radius:0;padding:3px}.hint{font-size:10px}.grid{grid-template-columns:repeat(2,1fr);gap:6px 12px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>Atropelamento - Perícia de Campo</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--txt:#111827;--mut:#6b7280;--line:#d1d5db;--pri:#111827;--ok:#065f46;--warn:#92400e;--bad:#991b1b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);font-size:15px}.top{position:sticky;top:0;z-index:3;background:var(--pri);color:#fff;padding:10px 12px;box-shadow:0 2px 8px #0002}.top h1{font-size:18px;margin:0 0 8px}.bar{display:flex;gap:6px;overflow:auto;padding-bottom:2px}button,.btn{border:0;border-radius:8px;padding:9px 10px;background:#374151;color:#fff;font-weight:700;cursor:pointer;white-space:nowrap}button:active{transform:scale(.98)}.danger{background:#b91c1c}.good{background:#047857}.light{background:#e5e7eb;color:#111827}.wrap{padding:10px;max-width:980px;margin:auto}.status{font-size:12px;color:#d1d5db}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;overflow:hidden}.head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px;background:#f9fafb;cursor:pointer}.head h2{font-size:16px;margin:0}.head span{color:var(--mut);font-size:13px}.body{padding:10px;display:none}.card.open .body{display:block}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:3px}.hint{display:block;font-weight:400;color:var(--mut);font-size:11px;line-height:1.25;margin-top:2px}input,select,textarea{width:100%;padding:9px;border:1px solid var(--line);border-radius:8px;background:#fff;font:inherit}textarea{min-height:68px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}.checks label{display:flex;gap:6px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:7px;background:#fff;font-weight:400}.checks input{width:auto;margin-top:2px}.mini{font-size:12px;color:var(--mut);margin:6px 0}.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pill{font-size:12px;background:#e5e7eb;border-radius:999px;padding:4px 8px}#pdfText{min-height:120px}.hidden{display:none}@media(max-width:720px){.grid{grid-template-columns:1fr}.checks{grid-template-columns:1fr}.top h1{font-size:16px}button{padding:8px}.wrap{padding:8px}}@media print{.top,.noPrint{display:none}.body{display:block!important}.card{break-inside:avoid}body{background:#fff}.wrap{max-width:none}.card{border:1px solid #999}}
+</style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <h1>Atropelamento - Registro Pericial de Campo</h1>
-    <div class="sub">Formulário objetivo para registro de via, visibilidade, sítio de interação, veículo, vítima e dispersão de vestígios.</div>
-  </header>
-  <h1 class="print-title">Atropelamento - Registro Pericial de Campo</h1>
-
-  <form id="form">
-    <section>
-      <h2>Identificação do atendimento</h2>
-      <div class="grid">
-        <div class="field"><label>Data</label><input type="date" name="data"><div class="hint">Data do exame no local.</div></div>
-        <div class="field"><label>Hora</label><input type="time" name="hora"><div class="hint">Horário aproximado de chegada/início dos exames.</div></div>
-        <div class="field"><label>Local</label><input name="local" placeholder="Rodovia, km, bairro ou referência"><div class="hint">Referência espacial objetiva do local.</div></div>
-        <div class="field"><label>Coordenadas GPS</label><div class="two"><input name="gps" placeholder="Latitude, Longitude"><button type="button" class="ok no-print" onclick="pegarGPS()">Pegar GPS</button></div><div class="hint">Registre coordenadas do ponto principal da ocorrência ou do corpo.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Geometria da via</h2>
-      <div class="grid">
-        <div class="field"><label>Sentido da via</label><select name="sentido_via"><option></option><option>Mão única</option><option>Mão dupla</option><option>Pista dupla</option><option>Via marginal</option><option>Outro</option></select><div class="hint">Define a organização do fluxo e ajuda a interpretar trajetórias.</div></div>
-        <div class="field"><label>Número de faixas</label><input name="numero_faixas" type="number" min="0" step="1"><div class="hint">Quantidade de faixas no trecho examinado.</div></div>
-        <div class="field"><label>Largura das faixas</label><input name="largura_faixas" placeholder="Ex.: 3,50 m"><div class="hint">Mede o espaço útil de circulação dos veículos.</div></div>
-        <div class="field"><label>Largura do acostamento</label><input name="largura_acostamento" placeholder="Ex.: 1,80 m"><div class="hint">Indica área lateral disponível para pedestres, parada ou evasão.</div></div>
-        <div class="field"><label>Tipo de pavimento</label><select name="tipo_pavimento"><option></option><option>Asfalto</option><option>Concreto</option><option>Paralelepípedo</option><option>Terra</option><option>Cascalho</option><option>Outro</option></select><div class="hint">Interfere em aderência, marcas e distância de frenagem.</div></div>
-        <div class="field"><label>Condição do pavimento</label><select name="condicao_pavimento"><option></option><option>Seco</option><option>Molhado</option><option>Úmido</option><option>Com óleo</option><option>Com areia/barro</option><option>Irregular</option></select><div class="hint">Afeta aderência, visibilidade de marcas e dinâmica veicular.</div></div>
-        <div class="field"><label>Velocidade regulamentada</label><input name="velocidade_reg" placeholder="Ex.: 60 km/h"><div class="hint">Velocidade sinalizada para o trecho.</div></div>
-        <div class="field"><label>Posição da defensa</label><input name="defensa" placeholder="Ex.: lado direito, a 1,2 m da borda"><div class="hint">Defensa pode limitar deslocamento, ocultar vestígios ou servir de referência.</div></div>
-        <div class="field"><label>Posição do canteiro</label><input name="canteiro" placeholder="Ex.: central, largura 2,0 m"><div class="hint">Auxilia a avaliar travessia, origem provável e barreiras físicas.</div></div>
-        <div class="field"><label>Declividade transversal</label><input name="declividade" placeholder="Ex.: caída para acostamento"><div class="hint">Inclinação lateral; pode influenciar escoamento de líquidos e dispersão.</div></div>
-        <div class="field"><label>Aclive/declive longitudinal</label><select name="aclive_declive"><option></option><option>Plano</option><option>Aclive</option><option>Declive</option><option>Topo de aclive</option><option>Fundo de vale</option><option>Não determinado</option></select><div class="hint">Inclinação no sentido da via; interfere em visibilidade e frenagem.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Visibilidade, iluminação e sinalização</h2>
-      <div class="grid">
-        <div class="field"><label>Tipo de iluminação</label><select name="tipo_iluminacao"><option></option><option>Dia</option><option>Noite</option><option>Crepúsculo</option><option>Amanhecer</option><option>Ambiente escuro</option></select><div class="hint">Condição luminosa geral no momento aproximado do fato/exame.</div></div>
-        <div class="field"><label>Iluminação pública</label><select name="iluminacao_publica"><option></option><option>Existente e funcional</option><option>Existente, porém deficiente</option><option>Existente, não funcional</option><option>Ausente</option><option>Não avaliada</option></select><div class="hint">Importante para percepção do pedestre pelo condutor.</div></div>
-        <div class="field"><label>Condições climáticas</label><select name="clima"><option></option><option>Céu claro</option><option>Nublado</option><option>Chuva</option><option>Garoa</option><option>Neblina</option><option>Após chuva</option><option>Outro</option></select><div class="hint">Pode afetar visibilidade, aderência e preservação de vestígios.</div></div>
-        <div class="field"><label>Obstáculos visuais</label><textarea name="obstaculos" placeholder="Veículos, placas, muros, construções..."></textarea><div class="hint">Elementos que reduzem o campo visual do condutor ou pedestre.</div></div>
-        <div class="field"><label>Vegetação</label><select name="vegetacao"><option></option><option>Ausente</option><option>Baixa, sem interferência</option><option>Alta, com possível interferência</option><option>Invadindo acostamento/pista</option><option>Não avaliada</option></select><div class="hint">Pode ocultar pedestre, objetos ou marcas.</div></div>
-        <div class="field"><label>Curvas</label><select name="curvas"><option></option><option>Trecho retilíneo</option><option>Curva suave</option><option>Curva acentuada</option><option>Curva à direita</option><option>Curva à esquerda</option></select><div class="hint">Curvas reduzem linha de visada e tempo de percepção.</div></div>
-        <div class="field"><label>Aclives com interferência visual</label><select name="aclives_visuais"><option></option><option>Ausentes</option><option>Presentes, sem interferência aparente</option><option>Presentes, com interferência visual</option><option>Não determinado</option></select><div class="hint">Topo de aclive pode ocultar pedestre ou veículo até curta distância.</div></div>
-        <div class="field"><label>Faixa de pedestres</label><select name="faixa_pedestre"><option></option><option>Existente próxima</option><option>Existente no ponto</option><option>Ausente</option><option>Apagada/deficiente</option><option>Não avaliada</option></select><div class="hint">Relevante para análise do local de travessia.</div></div>
-        <div class="field"><label>Sinalização vertical e horizontal</label><textarea name="sinalizacao" placeholder="Placas, marcas de pista, tachões, semáforo..."></textarea><div class="hint">Registre existência, estado de conservação e pertinência ao trecho.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Sítio de interação e vestígios</h2>
-      <div class="grid">
-        <div class="field"><label>Fragmentos</label><textarea name="fragmentos" placeholder="Tipo, quantidade e posição"></textarea><div class="hint">Podem indicar região provável do primeiro contato.</div></div>
-        <div class="field"><label>Sangue</label><textarea name="sangue" placeholder="Manchas, concentração, arraste, gotejamento"></textarea><div class="hint">Ajuda a diferenciar ponto de impacto, repouso ou deslocamento.</div></div>
-        <div class="field"><label>Objetos da vítima</label><textarea name="objetos_vitima" placeholder="Sandália, boné, celular, mochila..."></textarea><div class="hint">Dispersão dos objetos auxilia na direção e energia da projeção.</div></div>
-        <div class="field"><label>Marcas pneumáticas</label><textarea name="marcas_pneumaticas" placeholder="Frenagem, derrapagem, arraste, ausência"></textarea><div class="hint">Indicam manobras, perda de controle ou frenagem.</div></div>
-        <div class="field"><label>Vestígios biológicos</label><textarea name="vestigios_biologicos" placeholder="Cabelos, tecidos, fluidos..."></textarea><div class="hint">Podem confirmar contato veículo-vítima ou ponto de interação.</div></div>
-        <div class="field"><label>Distância sítio de interação-corpo</label><input name="dist_sitio_corpo" placeholder="Ex.: 18,4 m"><div class="hint">Medida essencial para estimar projeção pós-impacto.</div></div>
-        <div class="field"><label>Distância sítio-primeiro fragmento</label><input name="dist_sitio_fragmento" placeholder="Ex.: 2,1 m"><div class="hint">Ajuda a fixar o início da dispersão veicular.</div></div>
-        <div class="field"><label>Distância sítio-primeira mancha de sangue</label><input name="dist_sitio_sangue" placeholder="Ex.: 0,8 m"><div class="hint">Relaciona vestígio hemático ao ponto provável de interação.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Veículo</h2>
-      <div class="grid">
-        <div class="field"><label>Sentido de deslocamento do veículo</label><input name="sentido_veiculo" placeholder="Ex.: bairro-centro, norte-sul"><div class="hint">Direção declarada ou inferida por vestígios.</div></div>
-        <div class="field"><label>Região impactada</label><select name="regiao_impactada"><option></option><option>Para-choque dianteiro</option><option>Capô</option><option>Para-brisa</option><option>Coluna A</option><option>Retrovisor</option><option>Lateral</option><option>Parte inferior</option><option>Não determinada</option><option>Outra</option></select><div class="hint">Parte do veículo que apresenta dano/vestígio relacionado.</div></div>
-        <div class="field"><label>Altura do dano</label><input name="altura_dano" placeholder="Ex.: 72 cm do solo"><div class="hint">Auxilia correlação com região corporal atingida.</div></div>
-        <div class="field"><label>Largura/extensão do dano</label><input name="largura_dano" placeholder="Ex.: 48 cm"><div class="hint">Delimita a área de contato ou deformação.</div></div>
-        <div class="field"><label>Material aderido</label><textarea name="material_aderido" placeholder="Sangue, cabelo, tecido, tinta, poeira..."></textarea><div class="hint">Transferência material pode confirmar contato.</div></div>
-        <div class="field"><label>Observações do veículo</label><textarea name="obs_veiculo" placeholder="Conservação, avarias preexistentes, posição final..."></textarea><div class="hint">Separe danos recentes de danos sem relação aparente.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Vítima</h2>
-      <div class="grid">
-        <div class="field"><label>Posição final</label><textarea name="posicao_final" placeholder="Ex.: decúbito dorsal sobre a faixa direita"></textarea><div class="hint">Local onde o corpo foi encontrado.</div></div>
-        <div class="field"><label>Orientação do corpo</label><input name="orientacao_corpo" placeholder="Ex.: cabeça voltada para Recife"><div class="hint">Relação cabeça-pés com a via ou pontos cardeais.</div></div>
-        <div class="field"><label>Sentido de deslocamento da vítima</label><input name="sentido_vitima" placeholder="Ex.: acostamento para canteiro"><div class="hint">Direção de caminhada/travessia, quando inferível.</div></div>
-        <div class="field"><label>Lesões predominantes</label><textarea name="lesoes" placeholder="Cabeça, membros inferiores, tronco..."></textarea><div class="hint">Descrição externa preliminar, sem extrapolar causa médica.</div></div>
-        <div class="field"><label>Vestes</label><textarea name="vestes" placeholder="Tipo, cor e estado das roupas"></textarea><div class="hint">Cores e danos nas vestes podem auxiliar visibilidade e correlação com o veículo.</div></div>
-        <div class="field"><label>Objetos pessoais</label><textarea name="objetos_pessoais" placeholder="Carteira, documentos, chaves, celular..."></textarea><div class="hint">Registre se estavam junto ao corpo ou dispersos.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Dispersão de vestígios</h2>
-      <div class="grid">
-        <div class="field"><label>Distância objeto-corpo</label><input name="dist_objeto_corpo" placeholder="Ex.: sandália a 12,5 m"><div class="hint">Ajuda a interpretar projeção e sequência de eventos.</div></div>
-        <div class="field"><label>Distância corpo-veículo</label><input name="dist_corpo_veiculo" placeholder="Ex.: 45 m"><div class="hint">Relaciona repouso do corpo à posição final do veículo.</div></div>
-        <div class="field"><label>Distância fragmento-corpo</label><input name="dist_fragmento_corpo" placeholder="Ex.: 7,2 m"><div class="hint">Contribui para localizar o sítio de interação.</div></div>
-        <div class="field"><label>Referência das medições</label><textarea name="referencia_medicoes" placeholder="Ex.: borda direita da pista, marco km, poste..."></textarea><div class="hint">Indique a origem e os eixos usados nas medições.</div></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Resumo pericial preliminar</h2>
-      <div class="field"><label>Observações gerais</label><textarea name="observacoes" placeholder="Síntese objetiva do que foi constatado, sem conclusões não sustentadas."></textarea><div class="hint">Campo livre para observações, limitações e ressalvas técnicas.</div></div>
-    </section>
-  </form>
-
-  <div class="buttons no-print">
-    <button type="button" id="instalarApp" onclick="instalarApp()" style="display:none">Instalar app</button>
-    <button type="button" onclick="window.print()">Gerar PDF</button>
-    <button type="button" class="secondary" onclick="baixarJSON()">Exportar dados</button>
-    <label class="filebtn">Importar dados<input id="importar" type="file" accept="application/json" class="hidden"></label>
-    <button type="button" class="secondary" onclick="preencherDataHora()">Data/hora atual</button>
-    <button type="button" class="danger" onclick="limparDados()">Apagar dados</button>
-  </div>
-  <div id="status" class="status no-print">Salvamento automático ativo. Os dados ficam neste navegador até você apagá-los.</div>
-  <div class="footer-note no-print">Dica: use “Exportar dados” para guardar uma cópia do preenchimento fora do navegador.</div>
-</div>
+<header class="top"><h1>Atropelamento - Perícia de Campo</h1><div class="bar noPrint"><button onclick="openAll()">Abrir seções</button><button onclick="closeAll()">Recolher</button><button class="good" onclick="getGPS()">GPS</button><button onclick="makeSummary()">Resumo</button><button onclick="window.print()">Gerar PDF</button><button onclick="exportJSON()">Exportar</button><label class="btn"><input class="hidden" type="file" accept="application/json" onchange="importJSON(this)">Importar</label><button class="danger" onclick="clearData()">Apagar dados</button></div><div class="status" id="status">Salvamento automático ativo. Os dados ficam neste navegador até você apagar.</div></header>
+<main class="wrap">
+<section class="card open"><div class="head" onclick="toggle(this)"><h2>Leitura de PDF prévio</h2><span>opcional</span></div><div class="body"><p class="mini">Selecione um PDF anterior. A leitura é local no navegador. O texto extraído pode ser copiado para o resumo ou usado como referência. A extração automática depende da qualidade do PDF.</p><div class="row noPrint"><input type="file" id="pdfFile" accept="application/pdf"><button onclick="readPDF()">Ler PDF</button><button onclick="applyPdfHints()">Preencher pelo texto</button></div><textarea id="pdfText" data-save placeholder="Texto extraído do PDF aparecerá aqui."></textarea></div></section>
+<div id="sections"></div>
+<section class="card open"><div class="head" onclick="toggle(this)"><h2>Resumo para laudo</h2><span>automático/editável</span></div><div class="body"><textarea id="summary" data-save placeholder="Clique em Resumo para gerar um texto-base editável."></textarea></div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs" type="module"></script>
 <script>
-(function(){
-  const KEY='atropelamento_v3';
-  const form=document.getElementById('form');
-  const status=document.getElementById('status');
-  const setStatus=t=>{status.textContent=t};
-  const fields=()=>Array.from(form.querySelectorAll('input,select,textarea'));
-  const data=()=>Object.fromEntries(fields().map(e=>[e.name,e.value]));
-  const fill=o=>fields().forEach(e=>{if(o&&Object.prototype.hasOwnProperty.call(o,e.name))e.value=o[e.name]||''});
-  const save=()=>{localStorage.setItem(KEY,JSON.stringify(data()));setStatus('Dados salvos automaticamente neste navegador.')};
-  try{fill(JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
-  form.addEventListener('input',save);
-  form.addEventListener('change',save);
-  window.baixarJSON=function(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(data(),null,2)],{type:'application/json'}));a.download='atropelamento-dados.json';a.click();URL.revokeObjectURL(a.href)};
-  document.getElementById('importar').addEventListener('change',ev=>{const f=ev.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{fill(JSON.parse(r.result));save()}catch(e){alert('Arquivo JSON inválido.')}};r.readAsText(f)});
-  window.limparDados=function(){if(confirm('Apagar todos os dados salvos deste formulário?')){localStorage.removeItem(KEY);form.reset();setStatus('Dados apagados a pedido do usuário.')}};
-  window.preencherDataHora=function(){const d=new Date();form.data.value=d.toISOString().slice(0,10);form.hora.value=d.toTimeString().slice(0,5);save()};
-  window.pegarGPS=function(){if(!navigator.geolocation){alert('Geolocalização não suportada neste navegador.');return}setStatus('Obtendo GPS...');navigator.geolocation.getCurrentPosition(p=>{form.gps.value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6);save();setStatus('GPS preenchido e salvo.')},e=>{alert('Não foi possível obter o GPS. Verifique permissão/localização do navegador.');setStatus('GPS não preenchido.')},{enableHighAccuracy:true,timeout:12000,maximumAge:0})};
-})();
+const STORE='atropelamento_pwa_v2';
+const S=[
+['Acionamento',[['rep','REP nº','Número do registro pericial.'],['sei','SEI nº','Processo administrativo relacionado.'],['ciods','CIODS nº','Número do chamado.'],['natureza','Natureza informada pelo CIODS','Ex.: atropelamento com vítima fatal.','select',['','Atropelamento com vítima fatal','Atropelamento com vítima lesionada','Acidente de trânsito com pedestre','Outros']],['dataAcion','Data do acionamento','Data em que a equipe foi acionada.','date'],['horaAcion','Hora do acionamento','Horário comunicado à equipe.','time'],['horaChegada','Hora de chegada','Horário de chegada ao local.','time'],['horaInicio','Hora de início dos exames','Início dos registros periciais.','time'],['horaFim','Hora de término dos exames','Término dos exames no local.','time'],['autoridade','Autoridade requisitante','Quem requisitou a perícia.'],['delegado','Delegado responsável','Nome, se disponível.'],['matDelegado','Matrícula do delegado','Quando informada.']]],
+['Isolamento e preservação',[['isolado','Local isolado','Registrar se havia isolamento.','select',['','Sim','Não','Parcial']],['respIsol','Responsável pelo isolamento','Nome/posto/unidade.'],['matIsol','Matrícula','Matrícula do responsável.'],['unidPol','Unidade policial','Ex.: PM, PRF, PC.'],['areaIsol','Área abrangida pelo isolamento','Limites aproximados.'],['preserv','Preservação adequada','Avaliar alterações e proteção dos vestígios.','select',['','Sim','Não','Parcial']],['alteracoes','Alterações identificadas','Registrar movimentação de corpo, veículo ou vestígios.','textarea'],['corpoCoberto','Corpo coberto antes da perícia','Importante para transparência do exame.','select',['','Sim','Não','Não informado']],['veicMov','Veículo movimentado','Registrar se saiu da posição final.','select',['','Sim','Não','Não informado']],['vestAlt','Vestígios alterados','Registrar sinais de interferência.','select',['','Sim','Não','Não informado']],['curiosos','Presença de curiosos','Pode comprometer preservação.','select',['','Sim','Não']],['interf','Interferência de terceiros','Ex.: socorro, populares, limpeza.','textarea']]],
+['Descrição do local - localização',[['municipio','Município','Município do fato.'],['via','Rodovia/Via','Nome da via, rodovia e km.'],['km','Km','Marco quilométrico, se houver.'],['sentidoVia','Sentido da via','Sentido observado no local.'],['coords','Coordenadas GPS','Use o botão GPS ou digite.'],['metodoCoords','Método das coordenadas','GPS do celular, viatura, croqui etc.','select',['','GPS do celular','GPS da viatura','Informado por terceiros','Outro']],['referencia','Ponto de referência','Posto, entrada, ponte, placa, imóvel etc.']]],
+['Geometria da via',[['numFaixas','Número de faixas','Quantidade por sentido e total.','number'],['sentidosCirc','Sentido(s) de circulação','Mão única, dupla, sentido crescente/decrescente.','select',['','Mão única','Mão dupla','Pista dupla','Não determinado']],['largFaixas','Largura das faixas','Medir quando possível.'],['acost','Acostamento','Presença e condição.','select',['','Inexistente','Pavimentado','Não pavimentado','Parcial']],['largAcost','Largura do acostamento','Medida aproximada/referenciada.'],['canteiro','Canteiro central','Registrar presença, posição e largura.','select',['','Ausente','Presente','Presente com passagem','Não avaliado']],['defensa','Defensa metálica','Posição e distância em relação aos vestígios.','select',['','Ausente','Presente à direita','Presente à esquerda','Presente em ambos os lados']],['barreira','Barreira de concreto','Registrar se limita trajetória/visibilidade.','select',['','Ausente','Presente']],['meiofio','Meio-fio','Presença e posição.','select',['','Ausente','Presente']],['acliveDeclive','Aclive/declive','Inclinação longitudinal relevante.','select',['','Plano','Aclive','Declive','Ondulado']],['curvaReta','Curva ou reta','Geometria horizontal.','select',['','Reta','Curva à direita','Curva à esquerda','Trecho sinuoso']]]],
+['Pavimento e clima',[['tipoPav','Tipo de pavimento','Material da superfície.','select',['','Asfalto','Concreto','Paralelepípedo','Terra','Outro']],['condPav','Condição do pavimento','Seco/molhado/defeitos.','select',['','Seco','Molhado','Encharcado','Escorregadio','Com detritos']],['buracos','Buracos/defeitos relevantes','Registrar se influenciam dinâmica.','textarea'],['velReg','Velocidade regulamentada','Limite indicado na sinalização.'],['clima','Condições climáticas','Chuva, neblina, céu nublado etc.','select',['','Céu claro','Nublado','Chuva','Neblina','Garoa','Não avaliado']]]],
+['Visibilidade',[['horarioVis','Horário/condição de luz','Relacionar com visibilidade real.','select',['','Dia','Noite','Crepúsculo','Amanhecer']],['ilumPub','Iluminação pública','Existência no local.','select',['','Ausente','Presente']],['funcIlum','Funcionamento da iluminação','Funcionando/deficiente.','select',['','Funcionando','Deficiente','Apagada','Não avaliado']],['vegetacao','Vegetação','Pode ocultar vítima ou sinais.','textarea'],['obsVis','Obstáculos visuais','Veículos, placas, muros, curva, vegetação.','textarea'],['distVis','Distância de visibilidade disponível','De onde o condutor poderia avistar o pedestre.'],['curvasVis','Curvas/aclives que limitam visão','Registrar limitação concreta.','textarea']]],
+['Local imediato e mediato - vestígios',[['frag','Fragmentos veiculares','Plásticos, vidros, metais etc.','textarea'],['sangue','Sangue','Presença, posição e extensão.','textarea'],['bio','Vestígios biológicos','Cabelo, tecido, material orgânico etc.','textarea'],['marcasPneu','Marcas pneumáticas','Frenagem, derrapagem, arraste.','textarea'],['arrast','Arrastamento/sulcos/impressões','Registrar tipo, direção, extensão.','textarea'],['outrosVest','Outros vestígios','Elementos não previstos.','textarea']]],
+['Vestígios negativos',[['negFren','Ausência de frenagem','Marcar quando procurado e não localizado.','select',['','Não constatada','Constatada','Não avaliada']],['negPneu','Ausência de marcas pneumáticas','Inclui derrapagem/deslizamento.','select',['','Não constatadas','Constatadas','Não avaliadas']],['negSangue','Ausência de sangue','Quando relevante.','select',['','Não constatado','Constatado','Não avaliado']],['negFrag','Ausência de fragmentos','Quando relevante.','select',['','Não constatados','Constatados','Não avaliados']],['negArrast','Ausência de arrastamento/sulcos','Quando relevante.','select',['','Não constatados','Constatados','Não avaliados']],['obsNeg','Observações sobre vestígios negativos','Evitar conclusão sem registrar procura.','textarea']]],
+['Objetos associados à vítima',[['sand1','Sandália/chinelo 1','Posição e distância.'],['sand2','Sandália/chinelo 2','Posição e distância.'],['bone','Boné','Posição e distância.'],['celular','Celular','Posição e condição.'],['carteira','Carteira/documentos','Posição e condição.'],['mochila','Mochila/bolsa','Posição e condição.'],['objOutros','Outros objetos','Relação espacial com corpo/veículo.','textarea']]],
+['Medidas e dispersão',[['distObjCorpo','Objeto ↔ cadáver','Distância objeto-corpo.'],['distCorpoVeic','Cadáver ↔ veículo','Distância do corpo ao veículo.'],['distObjObj','Objeto ↔ objeto','Medidas entre pertences.'],['distVestBorda','Vestígio ↔ borda da pista','Usar referência fixa.'],['distVestDef','Vestígio ↔ defensa/acostamento/canteiro','Quando presente.'],['distSitCorpo','Sítio de interação ↔ corpo','Medida reconstrutiva importante.'],['distSitFrag','Sítio de interação ↔ primeiro fragmento','Ajuda a localizar impacto.'],['distSitSangue','Sítio de interação ↔ primeira mancha de sangue','Quando houver.']]],
+['Condutor',[['condIdent','Condutor identificado','Sim/não.','select',['','Sim','Não']],['condNome','Nome','Dados informados.'],['condDoc','Documento','RG/CPF/outro.'],['cnh','CNH','Número, se necessário.'],['catCnh','Categoria CNH','Categoria habilitação.','select',['','A','B','AB','C','D','E','ACC','Não apresentada']],['valCnh','Validade CNH','Data de validade.','date'],['propVeic','Proprietário do veículo','Nome/documento.'],['permLocal','Permaneceu no local','Sim/não.','select',['','Sim','Não','Saiu e retornou']],['lesCond','Apresentava lesões','Descrição geral.','textarea'],['atendMed','Recebeu atendimento médico','Sim/não/local.'],['alcoolemia','Teste de alcoolemia','Realizado? Resultado?'],['embriaguez','Sinais aparentes de embriaguez','Sem concluir sem base.','textarea'],['declCond','Declarações prestadas','Registrar como relato, não como fato.','textarea']]],
+['Veículo - identificação e posição',[['marca','Marca','Marca do veículo.'],['modelo','Modelo','Modelo/versão.'],['cor','Cor','Cor predominante.'],['ano','Ano/modelo','Ano de fabricação/modelo.'],['placa','Placa','Placa.'],['chassi','Chassi','Quando necessário.'],['munVeic','Município','Registro/licenciamento.'],['posVeic','Posição final','Faixa, acostamento, canteiro etc.','select',['','Faixa de rolamento','Acostamento','Canteiro','Área externa à via','Removido do local']],['orientVeic','Orientação do veículo','Frente voltada para qual sentido.'],['sentVeic','Sentido de deslocamento do veículo','Sentido provável/relatado/observado.']]],
+['Veículo - danos e material aderido',[['regDano','Região do dano','Localização principal.','select',['','Frontal','Frontal direita','Frontal esquerda','Lateral direita','Lateral esquerda','Traseira','Teto','Para-brisa','Coluna A','Retrovisor','Capô','Para-lama','Para-choque']],['alturaDano','Altura do dano principal','Medir do solo ao centro/limite do dano.'],['largDano','Extensão horizontal/largura do dano','Medida lateral do dano.'],['danosDesc','Descrição dos danos','Forma, sentido, recenticidade, deformações.','textarea'],['matAder','Material aderido','Sangue, cabelo, fibras, tecido, gordura etc.','textarea'],['fotMat','Material fotografado antes de remoção','Registrar cautela de preservação.','select',['','Sim','Não','Não se aplica']]]],
+['Vítima - identificação e dados reconstrutivos',[['vitNome','Nome','Quando identificado.'],['vitRg','RG','Quando disponível.'],['vitCpf','CPF','Quando disponível.'],['vitNasc','Data de nascimento','Ou idade aproximada.','date'],['vitIdade','Idade aproximada','Alto valor reconstrutivo.'],['vitSexo','Sexo','Dado observável/documental.','select',['','Masculino','Feminino','Não determinado']],['vitEst','Estatura','Medida/estimada, se possível.'],['filiacao','Filiação','Quando necessário.'],['natural','Naturalidade','Quando informada.'],['docFoto','Documento fotografado','Registrar se fotografado.','select',['','Sim','Não','Não havia documento']]]],
+['Vítima - posição, vestes e lesões',[['decubito','Decúbito','Posição corporal final.','select',['','Dorsal','Ventral','Lateral direito','Lateral esquerdo','Sentado','Outro']],['orientCab','Orientação da cabeça','Direção/ referência fixa.'],['orientPes','Orientação dos pés','Direção/ referência fixa.'],['posBracos','Posição dos braços','Estendidos/fletidos etc.'],['posPernas','Posição das pernas','Estendidas/fletidas/cruzadas etc.'],['relVia','Relação com a via','Faixa, acostamento, borda, canteiro.'],['relVeic','Relação com o veículo','Distância e orientação.'],['relObs','Relação com obstáculos','Defensa, meio-fio, vegetação etc.'],['vestes','Vestes','Tipo, cor, integridade, rasgos, sangue.','textarea'],['lesPred','Lesões predominantes','Localização, lateralidade e tipo geral.','textarea'],['sentVit','Sentido de deslocamento da vítima','Quando houver elementos.']]],
+['Perinecroscopia',[['cabeca','Cabeça','Lesões/alterações visíveis.','textarea'],['face','Face','Lesões/alterações visíveis.','textarea'],['cervical','Região cervical','Deformidades/lesões.','textarea'],['troncoAnt','Tronco anterior','Lesões/alterações.','textarea'],['troncoPost','Tronco posterior','Lesões/alterações.','textarea'],['msd','Membro superior direito','Lesões/alterações.','textarea'],['mse','Membro superior esquerdo','Lesões/alterações.','textarea'],['mid','Membro inferior direito','Lesões/alterações.','textarea'],['mie','Membro inferior esquerdo','Lesões/alterações.','textarea'],['sangNariz','Sangramento nasal/otorragia','Registrar presença/ausência.'],['fraturas','Fraturas aparentes/expostas','Sem substituir laudo necroscópico.','textarea'],['cadav','Rigidez/hipóstases/odor etílico','Achados externos relevantes.','textarea']]],
+['Cadeia de custódia',[['vestColet','Vestígio coletado','Sim/não/qual.','textarea'],['acond','Acondicionamento','Tipo de embalagem.'],['lacre','Lacre','Número do lacre.'],['encam','Encaminhamento/destino','Laboratório/unidade.'],['examesComp','Exames complementares solicitados','Toxicologia, DNA, alcoolemia etc.','textarea']]],
+['PIC/BIC e identificação cadavérica',[['pic','PIC afixada','Sim/não.','select',['','Sim','Não']],['numPic','Número da PIC','Número da pulseira/identificador.'],['membroPic','Membro utilizado','Ex.: punho direito.'],['bic','BIC preenchido','Boletim de identificação cadavérica.','select',['','Sim','Não']],['obsFinal','Observações finais e limitações','Registrar elementos insuficientes e cautelas.','textarea']]],
+['Reconstrução e limitações',[['sitProv','Sítio provável de interação','Descrever somente se houver elementos.','textarea'],['elemDeterm','Elementos que permitem determinar','Vestígios positivos utilizados.','textarea'],['elemInsuf','Elementos insuficientes','O que não foi possível afirmar.','textarea'],['limitacoes','Limitações registradas','Cena alterada, veículo removido, ausência de vestígios etc.','textarea']]]
+];
+const checklist=['Via: geometria','Via: sinalização','Via: iluminação','Via: clima','Via: pavimento','Vestígios: fragmentos','Vestígios: sangue','Vestígios: marcas pneumáticas','Vestígios: arrastamento','Vestígios: objetos pessoais','Vítima: posição','Vítima: orientação','Vítima: vestes','Vítima: lesões predominantes','Vítima: PIC/BIC','Veículo: identificação','Veículo: danos','Veículo: altura dos danos','Veículo: material aderido','Veículo: posição final','Medidas: corpo ↔ veículo','Medidas: corpo ↔ objeto','Medidas: objeto ↔ objeto','Medidas: vestígio ↔ borda da via','Reconstrução: sítio provável?','Reconstrução: elementos para determinar?','Reconstrução: elementos insuficientes?','Reconstrução: limitações registradas?'];
+function el(tag,attrs={},txt=''){const e=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>{if(k==='class')e.className=v;else e.setAttribute(k,v)}); if(txt)e.textContent=txt; return e}
+function render(){const root=document.getElementById('sections'); S.forEach(([title,fields])=>{let sec=el('section',{class:'card'}); let h=el('div',{class:'head',onclick:'toggle(this)'}); h.innerHTML='<h2>'+title+'</h2><span>toque para abrir</span>'; let b=el('div',{class:'body'}); let g=el('div',{class:'grid'}); fields.forEach(f=>g.appendChild(field(f))); b.appendChild(g); sec.append(h,b); root.appendChild(sec)}); let c=el('section',{class:'card'}); c.innerHTML='<div class="head" onclick="toggle(this)"><h2>Checklist rápido obrigatório</h2><span>controle de completude</span></div><div class="body"><div class="checks">'+checklist.map((x,i)=>'<label><input type="checkbox" data-save id="chk'+i+'"> '+x+'</label>').join('')+'</div></div>'; root.appendChild(c)}
+function field(f){let [id,label,hint,type='text',opts]=f; let w=el('div',{class:type==='textarea'?'field full':'field'}); let lab=el('label',{},label); lab.appendChild(el('span',{class:'hint'},hint||'')); let inp;if(type==='textarea'){inp=el('textarea',{id,'data-save':''})}else if(type==='select'){inp=el('select',{id,'data-save':''}); opts.forEach(o=>inp.appendChild(el('option',{value:o},o||'Selecionar')))}else{inp=el('input',{id,type,'data-save':''})} w.append(lab,inp); return w}
+function toggle(x){x.parentElement.classList.toggle('open')}
+function openAll(){document.querySelectorAll('.card').forEach(c=>c.classList.add('open'))}
+function closeAll(){document.querySelectorAll('.card').forEach(c=>c.classList.remove('open'))}
+function data(){let d={};document.querySelectorAll('[data-save]').forEach(e=>d[e.id]=e.type==='checkbox'?e.checked:e.value);return d}
+function load(){let d=JSON.parse(localStorage.getItem(STORE)||'{}');document.querySelectorAll('[data-save]').forEach(e=>{if(d[e.id]!==undefined){if(e.type==='checkbox')e.checked=d[e.id];else e.value=d[e.id]}})}
+function save(){localStorage.setItem(STORE,JSON.stringify(data()));document.getElementById('status').textContent='Salvo automaticamente às '+new Date().toLocaleTimeString('pt-BR')}
+function clearData(){if(confirm('Apagar todos os dados salvos neste navegador?')){localStorage.removeItem(STORE);location.reload()}}
+function getGPS(){if(!navigator.geolocation){alert('GPS não disponível neste navegador.');return}navigator.geolocation.getCurrentPosition(p=>{document.getElementById('coords').value=p.coords.latitude.toFixed(6)+', '+p.coords.longitude.toFixed(6);document.getElementById('metodoCoords').value='GPS do celular';save()},e=>alert('Não foi possível obter GPS: '+e.message),{enableHighAccuracy:true,timeout:12000,maximumAge:0})}
+function exportJSON(){let a=el('a',{href:URL.createObjectURL(new Blob([JSON.stringify(data(),null,2)],{type:'application/json'})),download:'atropelamento-dados.json'});a.click()}
+function importJSON(i){let f=i.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{localStorage.setItem(STORE,r.result);load();save();alert('Dados importados.')};r.readAsText(f)}
+function val(id){return (document.getElementById(id)?.value||'').trim()}
+function makeSummary(){let t=[];t.push(`Acionamento: REP ${val('rep')||'não informado'}, CIODS ${val('ciods')||'não informado'}, natureza ${val('natureza')||'não informada'}, chegada às ${val('horaChegada')||'não informada'}.`);t.push(`Local: ${val('via')||'via não informada'}, ${val('municipio')||'município não informado'}, coordenadas ${val('coords')||'não informadas'}.`);t.push(`Geometria: ${val('numFaixas')||'nº de faixas não informado'} faixas, circulação ${val('sentidosCirc')||'não informada'}, trecho ${val('curvaReta')||'não informado'}, ${val('acliveDeclive')||'sem declividade informada'}, acostamento ${val('acost')||'não informado'}, canteiro ${val('canteiro')||'não informado'}.`);t.push(`Pavimento/visibilidade: pavimento ${val('tipoPav')||'não informado'}, condição ${val('condPav')||'não informada'}, clima ${val('clima')||'não informado'}, iluminação ${val('ilumPub')||'não informada'} / ${val('funcIlum')||'funcionamento não informado'}, distância de visibilidade ${val('distVis')||'não informada'}.`);t.push(`Vestígios: fragmentos: ${val('frag')||'não descritos'}; sangue: ${val('sangue')||'não descrito'}; marcas pneumáticas: ${val('marcasPneu')||'não descritas'}; objetos: ${val('objOutros')||'não descritos'}.`);t.push(`Veículo: ${val('marca')} ${val('modelo')} ${val('cor')}, placa ${val('placa')||'não informada'}, posição final ${val('posVeic')||'não informada'}, dano em ${val('regDano')||'região não informada'}, altura ${val('alturaDano')||'não informada'}, material aderido: ${val('matAder')||'não descrito'}.`);t.push(`Vítima: ${val('vitNome')||'não identificada no campo'}, posição ${val('decubito')||'não informada'}, cabeça orientada para ${val('orientCab')||'não informado'}, pés para ${val('orientPes')||'não informado'}, vestes: ${val('vestes')||'não descritas'}, lesões predominantes: ${val('lesPred')||'não descritas'}.`);t.push(`Medidas: corpo-veículo ${val('distCorpoVeic')||'não informado'}, objeto-corpo ${val('distObjCorpo')||'não informado'}, sítio-corpo ${val('distSitCorpo')||'não informado'}, sítio-primeiro fragmento ${val('distSitFrag')||'não informado'}, sítio-primeira mancha de sangue ${val('distSitSangue')||'não informado'}.`);t.push(`Limitações/reconstrução: ${val('limitacoes')||'não registradas'}.`);document.getElementById('summary').value=t.join('\n\n');save()}
+async function readPDF(){let f=document.getElementById('pdfFile').files[0];if(!f){alert('Selecione um PDF.');return}try{let pdfjsLib=await import('https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs');pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';let buf=await f.arrayBuffer();let pdf=await pdfjsLib.getDocument({data:buf}).promise;let out='';for(let p=1;p<=pdf.numPages;p++){let page=await pdf.getPage(p);let tx=await page.getTextContent();out+='\n--- Página '+p+' ---\n'+tx.items.map(i=>i.str).join(' ')}document.getElementById('pdfText').value=out.trim();save()}catch(e){alert('Falha ao ler PDF. Verifique conexão na primeira abertura ou use texto copiado. '+e.message)}}
+function grab(txt,patterns){for(let p of patterns){let m=txt.match(p);if(m)return m[1].trim()}return''}
+function setIf(id,v){if(v&&!val(id))document.getElementById(id).value=v}
+function applyPdfHints(){let t=val('pdfText');if(!t){alert('Sem texto extraído.');return}setIf('rep',grab(t,[/REP\s*(?:n[ºo.]*)?\s*[:\-]?\s*([\w\.\/-]+)/i]));setIf('sei',grab(t,[/SEI\s*(?:n[ºo.]*)?\s*[:\-]?\s*([\w\.\/-]+)/i]));setIf('ciods',grab(t,[/CIODS\s*(?:n[ºo.]*)?\s*[:\-]?\s*([\w\.\/-]+)/i]));setIf('municipio',grab(t,[/Munic[ií]pio\s*[:\-]?\s*([^\n,.;]+)/i]));setIf('via',grab(t,[/(?:Rodovia|Via|Local)\s*[:\-]?\s*([^\n.;]+)/i]));setIf('placa',grab(t,[/Placa\s*[:\-]?\s*([A-Z0-9\-]{7,8})/i]));setIf('marca',grab(t,[/Marca\s*[:\-]?\s*([^\n.;]+)/i]));setIf('modelo',grab(t,[/Modelo\s*[:\-]?\s*([^\n.;]+)/i]));setIf('vitNome',grab(t,[/(?:V[ií]tima|Nome)\s*[:\-]?\s*([A-ZÁÉÍÓÚÂÊÔÃÕÇ][^\n.;]+)/i]));save();alert('Preenchimento tentado. Revise todos os campos, pois a extração é apenas auxiliar.')}
+render();load();document.addEventListener('input',e=>{if(e.target.matches('[data-save]'))save()});document.addEventListener('change',e=>{if(e.target.matches('[data-save]'))save()});if('serviceWorker'in navigator)navigator.serviceWorker.register('service-worker.js');
 </script>
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  const btn = document.getElementById('instalarApp');
-  if (btn) btn.style.display = 'inline-block';
-});
-async function instalarApp(){
-  if (!deferredPrompt) return alert('No celular, use o menu do navegador e escolha "Adicionar à tela inicial".');
-  deferredPrompt.prompt();
-  await deferredPrompt.userChoice;
-  deferredPrompt = null;
-  const btn = document.getElementById('instalarApp');
-  if (btn) btn.style.display = 'none';
-}
-</script>
-</body>
-</html>
+</body></html>
